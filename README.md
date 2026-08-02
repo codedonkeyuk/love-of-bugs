@@ -1,4 +1,4 @@
-# vue-template
+# love-of-bugs
 
 Simple Vue / Vite template containing. Starting point for future JS apps.
 
