@@ -3,6 +3,7 @@
     <div class="flower-frame">
       <div class="flower-icon-right" />
       <div class="flower-icon-left" />
+      <div class="bug-leaf" />
     </div>
   </div>
   <router-link to="/site">Go to Site</router-link>
@@ -56,6 +57,19 @@
   transform: translate(-50%, -50%) rotate(-35deg);
   transform-origin: center;
   background-image: url("./flower-head.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.bug-leaf {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  left: 80%;
+  top: 90%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  transform-origin: center;
+  background-image: url("./leaf.svg");
   background-repeat: no-repeat;
   background-size: contain;
 }
