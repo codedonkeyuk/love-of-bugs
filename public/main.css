@@ -29,6 +29,11 @@ body,
 
 body {
   font-family: Georgia, serif;
+  font-size: 1.2rem;
+  line-height: 1.625;
+  letter-spacing: -0.011em;
+  color: #1a1a1a;
+  font-weight: 400;
   background: var(--main-background);
   color: var(--main-color);
   margin: 0;
