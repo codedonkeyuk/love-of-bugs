@@ -254,9 +254,10 @@ defineProps({
 .spider {
   position: fixed;
   z-index: 100;
-  top: -50vh;
+  top: -100vh;
   right: 15vw;
   width: 40vw;
+  display: none;
 
   @media (min-width: 1024px) {
     right: 20vw;
@@ -267,6 +268,7 @@ defineProps({
 }
 
 .spider-drop {
+  display: block;
   animation: spiderFall 0.3s linear forwards;
 }
 

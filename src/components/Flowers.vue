@@ -3812,6 +3812,9 @@ defineProps({
   max-width: 600px;
   max-height: auto;
   max-height: 100%;
+  @media screen and (max-width: 1300px) and (orientation: landscape) {
+    max-width: 20vw;
+  }
 }
 
 .butterfly-drop {
