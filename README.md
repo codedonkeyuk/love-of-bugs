@@ -1,12 +1,8 @@
 # love-of-bugs
 
-Simple Vue / Vite template containing. Starting point for future JS apps.
+First app in my cursed series. A site dedicated to ones love of bugs. This app currently only hosts an intro page. Took me three days to build that as I had to build all the SVG assets by hand. Currently working on SASS nightmare on a separate dev branch.
 
 Vite has been configured to generate icons off a single svg file. This svg file is also used for social media image. You need to edit [./public/logo-square.svg](./public/logo-square.svg) to change all the images used in the app for social sharing and icons.
-
-## This app might not be up to date
-
-I update this project every time I use it, not every time there is a new update to a supporting library. So of you check it out, you might have to deal with some updates.
 
 ## instructions
 
