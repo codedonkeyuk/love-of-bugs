@@ -4,17 +4,25 @@ interface BugState {
   ladybug: boolean;
   bee: boolean;
   butterfly: boolean;
+  siteButton: boolean;
 }
 
 interface ConfigItem {
   message: string;
-  bug: keyof BugState;
+  bug?: keyof BugState;
 }
 
 const config: ConfigItem[] = [
-  { message: "show a ladybug", bug: "ladybug" },
-  { message: "Show a bee", bug: "bee" },
-  { message: "Show a butterfly", bug: "butterfly" },
+  { message: "A tiny red beetle out on a climb,", bug: "ladybug" },
+  { message: "A fuzzy gold worker who buzzes in time,", bug: "bee" },
+  {
+    message: "A bright splash of colour that floats in the sun,",
+    bug: "butterfly",
+  },
+  { message: "The garden is waking, and spring has begun!" },
+  {
+    message: "Welcome to the Love of Bugs, select the button below to continue",
+  },
 ];
 
 let messageIndex = -1;
@@ -31,8 +39,9 @@ export function nextMessage() {
   if (messageIndex < config.length) {
     const currentItem = config[messageIndex];
     globalState.message = currentItem.message;
-    globalState.bugs[currentItem.bug] = true;
-
+    if (currentItem.bug) {
+      globalState.bugs[currentItem.bug] = true;
+    }
     if (messageIndex === config.length - 1) {
       globalState.finished = true;
     }
