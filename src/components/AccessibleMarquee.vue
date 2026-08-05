@@ -97,8 +97,7 @@ onUnmounted(() => stopTimer());
   margin-bottom: 1.5rem;
 }
 .marquee-content {
-  font-family: sans-serif;
-  font-size: 1.1rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   transition: opacity 0.4s ease-in-out;
 }
 .fade-out {

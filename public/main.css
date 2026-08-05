@@ -28,6 +28,7 @@ body,
 }
 
 body {
+  font-family: Georgia, serif;
   background: var(--main-background);
   color: var(--main-color);
   margin: 0;

@@ -13,10 +13,10 @@ interface ConfigItem {
 }
 
 const config: ConfigItem[] = [
-  { message: "A tiny red beetle out on a climb,", bug: "ladybug" },
-  { message: "A fuzzy gold worker who buzzes in time,", bug: "bee" },
+  { message: "A tiny red beetle out on a climb...", bug: "ladybug" },
+  { message: "A fuzzy gold worker who buzzes in time...", bug: "bee" },
   {
-    message: "A bright splash of colour that floats in the sun,",
+    message: "A bright splash of colour that floats in the sun...",
     bug: "butterfly",
   },
   { message: "The garden is waking, and spring has begun!" },
