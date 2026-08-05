@@ -44,14 +44,12 @@ onUnmounted(() => stopTimer());
 </script>
 
 <template>
-  <!-- The container stays visible throughout -->
   <div
     v-if="globalState.message"
     class="marquee"
     role="region"
     aria-label="Timed Announcements Feed"
   >
-    <!-- The message content box now stays visible permanently -->
     <div
       class="marquee-content"
       :class="{ 'fade-out': isFading }"
@@ -63,7 +61,6 @@ onUnmounted(() => stopTimer());
       </span>
     </div>
 
-    <!-- The Play/Pause button still hides at the end since rotation stops -->
     <button
       v-if="!globalState.finished"
       class="btn"
@@ -78,7 +75,6 @@ onUnmounted(() => stopTimer());
       {{ isPaused ? "Play" : "Pause" }}
     </button>
 
-    <!-- The slot displays inside the flex layout below the final text message -->
     <slot v-if="globalState.finished"></slot>
   </div>
 </template>
