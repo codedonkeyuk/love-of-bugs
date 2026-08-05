@@ -21,7 +21,7 @@ const config: ConfigItem[] = [
   },
   { message: "The garden is waking, and spring has begun!" },
   {
-    message: "Welcome to the Love of Bugs, select the button below to continue",
+    message: "Welcome to the Love of Bugs",
   },
 ];
 

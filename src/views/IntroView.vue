@@ -9,9 +9,10 @@ const siteLink = ref(null);
 const proximityThreshold = 60;
 
 const isNear = ref(false);
+const spiderTriggered = ref(false);
 
 const checkProximity = (event) => {
-  if (!siteLink.value) return;
+  if (!siteLink.value || spiderTriggered.value) return;
 
   const element = siteLink.value.$el || siteLink.value;
   if (typeof element.getBoundingClientRect !== "function") return;
@@ -27,25 +28,39 @@ const checkProximity = (event) => {
   );
 
   if (totalDistance <= proximityThreshold) {
-    onNearLink();
-    removeListener();
+    triggerSpider();
   }
 };
 
-const onNearLink = () => {
-  isNear.value = true;
+const handleLinkClick = (event) => {
+  if (!spiderTriggered.value) {
+    event.preventDefault();
+    triggerSpider();
+  }
 };
 
-const removeListener = () => {
+const triggerSpider = () => {
+  isNear.value = true;
+  spiderTriggered.value = true;
+
   window.removeEventListener("mousemove", checkProximity);
 };
 
 onMounted(() => {
   window.addEventListener("mousemove", checkProximity);
+
+  if (siteLink.value) {
+    const element = siteLink.value.$el || siteLink.value;
+    element.addEventListener("click", handleLinkClick);
+  }
 });
 
 onUnmounted(() => {
-  removeListener();
+  window.removeEventListener("mousemove", checkProximity);
+  if (siteLink.value) {
+    const element = siteLink.value.$el || siteLink.value;
+    element.removeEventListener("click", handleLinkClick);
+  }
 });
 </script>
 <template>

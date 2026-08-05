@@ -98,7 +98,14 @@ onUnmounted(() => stopTimer());
 }
 .marquee-content {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
+  text-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.08);
+
   transition: opacity 0.4s ease-in-out;
+
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 .fade-out {
   opacity: 0;

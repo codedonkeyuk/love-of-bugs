@@ -37,6 +37,10 @@ defineProps({
   border-radius: 8px;
   border-left: 4px solid #ffcc00;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  @media (max-width: 600px) {
+    left: inherit;
+    transform: inherit;
+  }
 }
 
 .toast-content {

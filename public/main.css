@@ -1,6 +1,10 @@
 :root {
   --main-background: #c3b091;
   --main-color: black;
+  --button-background: #0076ff;
+  --button-background-hover: #005cd6;
+  --button-background-focus: #94c5ff;
+  --button-color: white;
 }
 
 @media (prefers-color-scheme: dark) {
