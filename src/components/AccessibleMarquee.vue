@@ -81,8 +81,6 @@ onUnmounted(() => stopTimer());
 
 <style scoped>
 .marquee {
-  position: fixed;
-  top: 4vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -90,7 +88,14 @@ onUnmounted(() => stopTimer());
   gap: 1.5rem;
   padding: 1rem;
   border-radius: 4px;
-  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  width: 100vw;
+  @media screen and (orientation: landscape) {
+    & {
+      margin-top: 0;
+      width: 50vw;
+    }
+  }
 }
 .marquee-content {
   font-size: clamp(1.8rem, 4vw, 2.5rem);

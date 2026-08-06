@@ -242,15 +242,6 @@ defineProps({
   height: 100vh;
 }
 
-.flowers {
-  position: relative;
-  width: 100vw;
-  height: auto;
-  max-width: 600px;
-  max-height: auto;
-  max-height: 100%;
-}
-
 .spider {
   position: fixed;
   z-index: 100;
@@ -258,18 +249,17 @@ defineProps({
   right: 15vw;
   width: 40vw;
   display: none;
-
-  @media (min-width: 1024px) {
-    right: 20vw;
-  }
-  @media (min-width: 2048px) {
-    right: 25vw;
+  @media screen and (orientation: landscape) {
+    & {
+      width: 20vw;
+      right: 5vw;
+    }
   }
 }
 
 .spider-drop {
   display: block;
-  animation: spiderFall 0.3s linear forwards;
+  animation: spiderFall 0.4s linear forwards;
 }
 
 @keyframes spiderFall {
