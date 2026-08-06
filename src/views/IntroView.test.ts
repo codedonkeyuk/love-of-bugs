@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { mount } from "@vue/test-utils";
 import IntroView from "./IntroView.vue";
 
@@ -18,15 +18,22 @@ vi.mock("../components/Flowers.vue", () => ({
   },
 }));
 
+const mockPush = vi.fn();
 vi.mock("vue-router", () => ({
-  RouterLink: {
-    template: "<a class='btn'><slot /></a>",
-  },
+  useRouter: () => ({
+    push: mockPush,
+  }),
 }));
 
 describe("Scare Layout Component", () => {
   beforeEach(() => {
     vi.restoreAllMocks();
+    mockPush.mockClear();
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("renders child components with accurate initial property bindings", () => {
@@ -51,12 +58,14 @@ describe("Scare Layout Component", () => {
     expect(wrapper.vm.spiderTriggered).toBe(true);
   });
 
-  it("does not block navigation on the second click after the spider has dropped", async () => {
+  it("does not block navigation on the second click after the spider has dropped and time-lock clears", async () => {
     const wrapper = mount(IntroView);
     const link = wrapper.find(".btn");
 
     await link.trigger("click");
     expect(wrapper.vm.spiderTriggered).toBe(true);
+
+    vi.advanceTimersByTime(800);
 
     const secondClickEvent = {
       preventDefault: vi.fn(),
@@ -64,7 +73,8 @@ describe("Scare Layout Component", () => {
 
     await link.trigger("click", secondClickEvent);
 
-    expect(secondClickEvent.preventDefault).not.toHaveBeenCalled();
+    expect(secondClickEvent.preventDefault).toHaveBeenCalled();
+    expect(mockPush).toHaveBeenCalledWith("/site");
   });
 
   it("triggers the jump scare when the mouse moves inside the geometric proximity threshold", async () => {

@@ -1,21 +1,24 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
 import AccessibleMarquee from "../components/AccessibleMarquee.vue";
 import SpiderToast from "../components/SpiderToast.vue";
 import DropSpider from "../components/DropSpider.vue";
 import Flowers from "../components/Flowers.vue";
 
+const router = useRouter();
 const siteLink = ref(null);
 const proximityThreshold = 60;
 
 const isNear = ref(false);
 const spiderTriggered = ref(false);
+const canNavigate = ref(false);
 
 const checkProximity = (event) => {
   if (!siteLink.value || spiderTriggered.value) return;
 
-  const element = siteLink.value.$el || siteLink.value;
-  if (typeof element.getBoundingClientRect !== "function") return;
+  const element = siteLink.value?.$el || siteLink.value;
+  if (!element || typeof element.getBoundingClientRect !== "function") return;
 
   const rect = element.getBoundingClientRect();
   const linkX = rect.left + rect.width / 2;
@@ -33,48 +36,50 @@ const checkProximity = (event) => {
 };
 
 const handleLinkClick = (event) => {
+  event.preventDefault();
+
   if (!spiderTriggered.value) {
-    event.preventDefault();
     triggerSpider();
+  } else if (canNavigate.value) {
+    router.push("/site");
   }
 };
 
 const triggerSpider = () => {
   isNear.value = true;
   spiderTriggered.value = true;
-
   window.removeEventListener("mousemove", checkProximity);
+
+  setTimeout(() => {
+    canNavigate.value = true;
+  }, 800);
 };
 
 onMounted(() => {
-  window.addEventListener("mousemove", checkProximity);
-
-  if (siteLink.value) {
-    const element = siteLink.value.$el || siteLink.value;
-    element.addEventListener("click", handleLinkClick);
+  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+  if (!isTouchDevice) {
+    window.addEventListener("mousemove", checkProximity);
   }
 });
 
 onUnmounted(() => {
   window.removeEventListener("mousemove", checkProximity);
-  if (siteLink.value) {
-    const element = siteLink.value.$el || siteLink.value;
-    element.removeEventListener("click", handleLinkClick);
-  }
 });
 </script>
+
 <template>
   <div class="container">
     <AccessibleMarquee>
-      <router-link ref="siteLink" class="btn" to="/site"
-        >Go to Site</router-link
-      >
+      <a ref="siteLink" class="btn" href="/site" @click="handleLinkClick">
+        Go to Site
+      </a>
     </AccessibleMarquee>
     <Flowers :isNear="isNear" />
   </div>
   <DropSpider :isNear="isNear" />
   <SpiderToast :show="isNear" />
 </template>
+
 <style>
 .container {
   display: flex;
