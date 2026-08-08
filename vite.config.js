@@ -52,5 +52,10 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
     alias: [{ find: /\?url$/, replacement: "" }],
+    server: {
+      deps: {
+        inline: [/\.(png|jpg|jpeg|gif|svg|webp)\?url$/],
+      },
+    },
   },
 });

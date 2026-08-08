@@ -1,7 +1,9 @@
 <script setup>
 import PetriDishBugCanvas from "../components/PetriDishBugCanvas.vue";
-import BugIcon from "/logo-square.svg?url";
+import Ladybug from "/ladybug.png?url";
 import Cockroach from "/cockroach.png?url";
+import Midge from "/midge.png?url";
+import Fly from "/fly.png?url";
 </script>
 <template>
   <div class="page-container">
@@ -17,8 +19,8 @@ import Cockroach from "/cockroach.png?url";
       </p>
       <PetriDishBugCanvas
         size="250px"
-        :bugCount="1"
-        :bugSvgUrl="BugIcon"
+        :bugCount="15"
+        :bugSvgUrl="Ladybug"
         label="ladybug"
       />
       <PetriDishBugCanvas
@@ -26,6 +28,18 @@ import Cockroach from "/cockroach.png?url";
         :bugCount="3"
         :bugSvgUrl="Cockroach"
         label="cockroach"
+      />
+      <PetriDishBugCanvas
+        size="250px"
+        :bugCount="500"
+        :bugSvgUrl="Midge"
+        label="Scottish Midgie"
+      />
+      <PetriDishBugCanvas
+        size="250px"
+        :bugCount="100"
+        :bugSvgUrl="Fly"
+        label="Fly"
       />
     </div>
   </div>

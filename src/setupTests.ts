@@ -16,12 +16,6 @@ if (typeof window !== "undefined") {
   }) as any;
 }
 
-vi.stubGlobal("/logo-square.svg?url", "/logo-square.svg");
-
-vi.mock("*.svg?url", () => ({
-  default: "/logo-square.svg",
-}));
-
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query: string) => ({
