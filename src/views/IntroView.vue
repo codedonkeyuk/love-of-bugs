@@ -86,7 +86,6 @@ onUnmounted(() => {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 5vw;
   width: 100%;
   height: 100vh;
   @media screen and (orientation: landscape) {
