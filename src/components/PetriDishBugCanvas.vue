@@ -66,7 +66,6 @@ const triggerBugPanic = (targetBug: InteractiveBug, customAngle?: number) => {
   targetBug.currentState = "PANIC";
   targetBug.speed = PANIC_SPEED;
 
-  // Start animating legs during panic
   targetBug.play();
 
   targetBug.direction =
@@ -78,7 +77,6 @@ const triggerBugPanic = (targetBug: InteractiveBug, customAngle?: number) => {
     targetBug.currentState = "STILL";
     targetBug.speed = 0;
 
-    // Stop animating legs when still
     targetBug.stop();
 
     targetBug.panicTimeoutId = null;
@@ -93,13 +91,11 @@ const decideAllNextActions = () => {
       targetBug.currentState = "STILL";
       targetBug.speed = 0;
 
-      // Stop animating legs when still
       targetBug.stop();
     } else {
       targetBug.currentState = "WANDER";
       targetBug.speed = WANDER_SPEED;
 
-      // Start animating legs when walking
       targetBug.play();
 
       targetBug.direction = Math.random() * Math.PI * 2;
@@ -194,7 +190,6 @@ onMounted(() => {
 
       const texture = await PIXI.Assets.load<PIXI.Texture>(props.bugSvgUrl);
 
-      // NO HARDCODED NUMBERS: Read sizes directly from your incoming image files
       const TOTAL_FRAMES = 4;
       const FRAME_WIDTH = texture.width / TOTAL_FRAMES;
       const FRAME_HEIGHT = texture.height;
@@ -214,7 +209,6 @@ onMounted(() => {
         walkFrames.push(textureFrame);
       }
 
-      // Clean, pure Vue loops natively tracking props.bugCount directly
       for (let i = 0; i < props.bugCount; i++) {
         const sprite = new PIXI.AnimatedSprite(walkFrames) as InteractiveBug;
 
@@ -230,10 +224,8 @@ onMounted(() => {
         sprite.direction = Math.random() * Math.PI * 2;
         sprite.panicTimeoutId = null;
 
-        // Configure frame animation settings
         sprite.animationSpeed = 0.15;
 
-        // Spawn bugs in a stopped state on a completely random limb frame layout
         sprite.gotoAndStop(Math.floor(Math.random() * TOTAL_FRAMES));
 
         sprite.eventMode = "static";
