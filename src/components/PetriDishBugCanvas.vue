@@ -31,7 +31,7 @@ const canvasContainer = ref<HTMLDivElement | null>(null);
 let app: PIXI.Application | null = null;
 let observer: IntersectionObserver | null = null;
 
-interface InteractiveBug extends PIXI.Sprite {
+interface InteractiveBug extends PIXI.AnimatedSprite {
   currentState: "STILL" | "WANDER" | "PANIC";
   speed: number;
   direction: number;
@@ -65,6 +65,10 @@ const updateDishDimensions = () => {
 const triggerBugPanic = (targetBug: InteractiveBug, customAngle?: number) => {
   targetBug.currentState = "PANIC";
   targetBug.speed = PANIC_SPEED;
+
+  // Start animating legs during panic
+  targetBug.play();
+
   targetBug.direction =
     customAngle !== undefined ? customAngle : Math.random() * Math.PI * 2;
 
@@ -73,6 +77,10 @@ const triggerBugPanic = (targetBug: InteractiveBug, customAngle?: number) => {
   targetBug.panicTimeoutId = window.setTimeout(() => {
     targetBug.currentState = "STILL";
     targetBug.speed = 0;
+
+    // Stop animating legs when still
+    targetBug.stop();
+
     targetBug.panicTimeoutId = null;
   }, PANIC_DURATION);
 };
@@ -84,9 +92,16 @@ const decideAllNextActions = () => {
     if (Math.random() < 0.65) {
       targetBug.currentState = "STILL";
       targetBug.speed = 0;
+
+      // Stop animating legs when still
+      targetBug.stop();
     } else {
       targetBug.currentState = "WANDER";
       targetBug.speed = WANDER_SPEED;
+
+      // Start animating legs when walking
+      targetBug.play();
+
       targetBug.direction = Math.random() * Math.PI * 2;
     }
   });
@@ -179,9 +194,29 @@ onMounted(() => {
 
       const texture = await PIXI.Assets.load<PIXI.Texture>(props.bugSvgUrl);
 
+      // NO HARDCODED NUMBERS: Read sizes directly from your incoming image files
+      const TOTAL_FRAMES = 4;
+      const FRAME_WIDTH = texture.width / TOTAL_FRAMES;
+      const FRAME_HEIGHT = texture.height;
+      const walkFrames: PIXI.Texture[] = [];
+
+      for (let i = 0; i < TOTAL_FRAMES; i++) {
+        const frameRectangle = new PIXI.Rectangle(
+          i * FRAME_WIDTH,
+          0,
+          FRAME_WIDTH,
+          FRAME_HEIGHT,
+        );
+        const textureFrame = new PIXI.Texture({
+          source: texture.source,
+          frame: frameRectangle,
+        });
+        walkFrames.push(textureFrame);
+      }
+
       // Clean, pure Vue loops natively tracking props.bugCount directly
       for (let i = 0; i < props.bugCount; i++) {
-        const sprite = new PIXI.Sprite(texture) as InteractiveBug;
+        const sprite = new PIXI.AnimatedSprite(walkFrames) as InteractiveBug;
 
         sprite.anchor.set(0.5);
 
@@ -194,6 +229,12 @@ onMounted(() => {
         sprite.speed = 0;
         sprite.direction = Math.random() * Math.PI * 2;
         sprite.panicTimeoutId = null;
+
+        // Configure frame animation settings
+        sprite.animationSpeed = 0.15;
+
+        // Spawn bugs in a stopped state on a completely random limb frame layout
+        sprite.gotoAndStop(Math.floor(Math.random() * TOTAL_FRAMES));
 
         sprite.eventMode = "static";
         sprite.cursor = "pointer";
@@ -284,53 +325,36 @@ onUnmounted(() => {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: auto;
-  padding: 20px;
+  height: 100%;
 }
 .petri-dish-rim {
-  position: relative;
-  width: v-bind("props.size");
-  height: v-bind("props.size");
+  border: 10px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  padding: 8px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.5) 0%,
-    rgba(200, 200, 200, 0.2) 100%
-  );
-  box-shadow:
-    0 15px 35px rgba(0, 0, 0, 0.15),
-    inset 0 2px 4px rgba(255, 255, 255, 0.6),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 .petri-dish-basin {
   position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-  background: rgba(244, 247, 246, 0.3);
-  box-shadow:
-    inset 0 10px 20px rgba(0, 0, 0, 0.08),
-    inset 0 -5px 15px rgba(255, 255, 255, 0.4);
+  width: v-bind("props.size");
+  height: v-bind("props.size");
+  background: radial-gradient(
+    circle,
+    rgba(240, 248, 255, 0.1) 0%,
+    rgba(200, 220, 240, 0.2) 100%
+  );
 }
 .glass-reflection-shine {
   position: absolute;
   top: 5%;
   left: 10%;
   width: 80%;
-  height: 35%;
-  border-radius: 50%;
+  height: 20%;
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.15) 0%,
     rgba(255, 255, 255, 0) 100%
   );
+  border-radius: 50% / 100% 100% 0 0;
   pointer-events: none;
-  transform: rotate(-10deg);
-}
-canvas {
-  display: block;
 }
 </style>

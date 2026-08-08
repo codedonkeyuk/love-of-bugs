@@ -3,18 +3,29 @@ import { mount } from "@vue/test-utils";
 import PetriDishBugCanvas from "./PetriDishBugCanvas.vue";
 
 vi.mock("pixi.js", () => {
-  class MockTexture {}
+  class MockTexture {
+    width = 600;
+    height = 111;
+    source = {};
+  }
 
-  class MockSprite {
+  class MockRectangle {}
+
+  class MockAnimatedSprite {
     anchor = { set: vi.fn() };
     x = 0;
     y = 0;
-    width = 20;
-    height = 20;
+    width = 150;
+    height = 111;
     rotation = 0;
     eventMode = "none";
     cursor = "auto";
+    animationSpeed = 0.15;
     on = vi.fn();
+    play = vi.fn();
+    stop = vi.fn();
+    gotoAndPlay = vi.fn();
+    gotoAndStop = vi.fn();
   }
 
   class MockApplication {
@@ -22,6 +33,7 @@ vi.mock("pixi.js", () => {
     stage = {
       addChild: vi.fn(),
       eventMode: "static",
+      hitArea: {},
       on: vi.fn(),
     };
     ticker = {
@@ -39,8 +51,9 @@ vi.mock("pixi.js", () => {
 
   return {
     Application: MockApplication,
-    Sprite: MockSprite,
-    Texture: MockTexture,
+    AnimatedSprite: MockAnimatedSprite,
+    Texture: vi.fn().mockImplementation(() => new MockTexture()),
+    Rectangle: MockRectangle,
     Assets: {
       load: vi.fn().mockResolvedValue(new MockTexture()),
     },
@@ -112,6 +125,7 @@ describe("PetriDishBugCanvas.vue", () => {
 
     expect(wrapper.exists()).toBe(true);
   });
+
   it("it outpusts the label name", () => {
     const wrapper = mount(PetriDishBugCanvas, {
       props: {
