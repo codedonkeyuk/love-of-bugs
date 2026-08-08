@@ -51,5 +51,6 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
+    alias: [{ find: /\?url$/, replacement: "" }],
   },
 });
