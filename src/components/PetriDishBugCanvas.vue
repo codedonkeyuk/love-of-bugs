@@ -5,6 +5,7 @@
         <div class="glass-reflection-shine"></div>
       </div>
     </div>
+    <div class="sample-label">{{ label }}</div>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ interface BugCanvasProps {
   size?: string;
   bugSvgUrl: string; // IMPORTANT: drawn horizontally, facing directly to the right.
   bugCount?: number;
+  label?: string;
 }
 
 const props = withDefaults(defineProps<BugCanvasProps>(), {
@@ -270,8 +272,15 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sample-label {
+  margin: 10px;
+  padding: 5px;
+  background-color: black;
+  color: white;
+}
 .petri-dish-scene {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;

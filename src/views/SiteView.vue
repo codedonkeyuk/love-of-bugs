@@ -1,6 +1,7 @@
 <script setup>
 import PetriDishBugCanvas from "../components/PetriDishBugCanvas.vue";
 import BugIcon from "/logo-square.svg?url";
+import Cockroach from "/cockroach.png?url";
 </script>
 <template>
   <div class="page-container">
@@ -14,10 +15,18 @@ import BugIcon from "/logo-square.svg?url";
       <p>
         <strong>Coming Soon: A SASS bug based nightmare.</strong>
       </p>
-      <PetriDishBugCanvas size="250px" :bugCount="1" :bugSvgUrl="BugIcon" />
-      <PetriDishBugCanvas size="250px" :bugSvgUrl="BugIcon" />
-      <PetriDishBugCanvas size="250px" :bugSvgUrl="BugIcon" />
-      <PetriDishBugCanvas size="250px" :bugSvgUrl="BugIcon" />
+      <PetriDishBugCanvas
+        size="250px"
+        :bugCount="1"
+        :bugSvgUrl="BugIcon"
+        label="ladybug"
+      />
+      <PetriDishBugCanvas
+        size="250px"
+        :bugCount="3"
+        :bugSvgUrl="Cockroach"
+        label="cockroach"
+      />
     </div>
   </div>
 </template>

@@ -112,4 +112,14 @@ describe("PetriDishBugCanvas.vue", () => {
 
     expect(wrapper.exists()).toBe(true);
   });
+  it("it outpusts the label name", () => {
+    const wrapper = mount(PetriDishBugCanvas, {
+      props: {
+        bugSvgUrl: "/logo-square.svg",
+        label: "I am a label",
+      },
+    });
+
+    expect(wrapper.find(".sample-label").text()).toBe("I am a label");
+  });
 });
