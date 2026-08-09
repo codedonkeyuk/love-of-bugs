@@ -1,3 +1,22 @@
+import Ant from "/ant-anim.png?url";
+
+import Aphid from "/aphid-anim.png?url";
+import Bee from "/bee-anim.png?url";
+import Bedbug from "/bedbug-anim.png?url";
+import BrushFootedButterfly from "/brush-footed-butterfly-anim.png?url";
+import CockroachLarge from "/cockroach-large-anim.png?url";
+import Fly from "/fly-anim.png?url";
+import GroundBeetle from "/ground-beetle-anim.png?url";
+import Hawkmoth from "/hawkmoth-anim.png?url";
+import Hoverfly from "/hoverfly-anim.png?url";
+import Mosquito from "/mosquito-anim.png?url";
+import Scarab from "/scarab-anim.png?url";
+import Shallowtail from "/shallowtail-anim.png?url";
+import StagBettle from "/stag-beetle-anim.png?url";
+import Termite from "/termite-anim.png?url";
+import Wasp from "/wasp-anim.png?url";
+import Weevil from "/weevil-anim.png?url";
+
 import Ladybug from "/ladybug-anim.png?url";
 import Cockroach from "/cockroach-anim.png?url";
 import StinkBug from "/stinkbug-anim.png?url";
@@ -31,6 +50,7 @@ const bugCategories: BugCategory[] = [
             label: "Cicada",
             bugCount: 1,
             src: Cicada,
+            size: "500px",
           },
         ],
       },
@@ -38,13 +58,25 @@ const bugCategories: BugCategory[] = [
         name: "Aphids",
         description:
           "Tiny, soft-bodied garden pests that multiply rapidly and secrete a sticky, sweet fluid called honeydew.",
-        samples: [],
+        samples: [
+          {
+            label: "Aphid",
+            bugCount: 50,
+            src: Aphid,
+          },
+        ],
       },
       {
         name: "Bedbugs",
         description:
           "Small, flat, wingless nocturnal parasites that hide in cracks and feed exclusively on warm-blooded hosts.",
-        samples: [],
+        samples: [
+          {
+            label: "Bed Bug",
+            bugCount: 25,
+            src: Bedbug,
+          },
+        ],
       },
     ],
   },
@@ -69,19 +101,45 @@ const bugCategories: BugCategory[] = [
         name: "Weevils",
         description:
           "Herbivorous beetles most easily identified by their distinct, elongated snouts used to bore into seeds and grain.",
-        samples: [],
+        samples: [
+          {
+            label: "Weevil",
+            bugCount: 1,
+            src: Weevil,
+            size: "500px",
+          },
+        ],
       },
       {
         name: "Scarab Beetles",
         description:
           "Stout-bodied beetles with clubbed antennae, including ecological recyclers like dung rollers and massive horned species.",
-        samples: [],
+        samples: [
+          {
+            label: "Scarab",
+            bugCount: 1,
+            src: Scarab,
+            size: "500px",
+          },
+          {
+            label: "Stag Beetle",
+            bugCount: 1,
+            src: StagBettle,
+            size: "500px",
+          },
+        ],
       },
       {
         name: "Ground Beetles",
         description:
           "Fast-running, shiny, or metallic nocturnal predators that hunt heavily along the soil surface.",
-        samples: [],
+        samples: [
+          {
+            label: "Ground Beetle",
+            bugCount: 5,
+            src: GroundBeetle,
+          },
+        ],
       },
     ],
   },
@@ -94,19 +152,40 @@ const bugCategories: BugCategory[] = [
         name: "Swallowtails",
         description:
           "Large, vividly patterned butterflies featuring elegant, tail-like extensions on their hindwings.",
-        samples: [],
+        samples: [
+          {
+            label: "Shallow Tail",
+            bugCount: 1,
+            src: Shallowtail,
+            size: "500px",
+          },
+        ],
       },
       {
         name: "Hawk Moths",
         description:
           "Heavy-bodied, powerful flyers with narrow wings, capable of hovering mid-air like hummingbirds to drink nectar.",
-        samples: [],
+        samples: [
+          {
+            label: "Hawk Moth",
+            bugCount: 1,
+            src: Hawkmoth,
+            size: "500px",
+          },
+        ],
       },
       {
         name: "Brush-footed Butterflies",
         description:
           "The largest butterfly family, named for their short, hairy front legs that look like small brushes.",
-        samples: [],
+        samples: [
+          {
+            label: "Brush-footed Butterflies",
+            bugCount: 1,
+            src: BrushFootedButterfly,
+            size: "500px",
+          },
+        ],
       },
     ],
   },
@@ -119,19 +198,37 @@ const bugCategories: BugCategory[] = [
         name: "Bees",
         description:
           "Furry-bodied, pollen-collecting insects vital to global agriculture and the health of flowering plants.",
-        samples: [],
+        samples: [
+          {
+            label: "Bee",
+            bugCount: 1,
+            src: Bee,
+          },
+        ],
       },
       {
         name: "Ants",
         description:
           "Eusocial, mostly wingless ground-dwellers known for complex trail systems, heavy lifting, and underground fortresses.",
-        samples: [],
+        samples: [
+          {
+            label: "Ant",
+            bugCount: 1,
+            src: Ant,
+          },
+        ],
       },
       {
         name: "Wasps & Hornets",
         description:
           "Predatory or parasitic insects with smooth bodies, narrow waists, and potent, reusable defensive stingers.",
-        samples: [],
+        samples: [
+          {
+            label: "Wasp",
+            bugCount: 3,
+            src: Wasp,
+          },
+        ],
       },
     ],
   },
@@ -144,19 +241,37 @@ const bugCategories: BugCategory[] = [
         name: "Houseflies",
         description:
           "Common worldwide scavengers with sponge-like mouthparts that rapidly liquefy food and spread pathogens.",
-        samples: [],
+        samples: [
+          {
+            label: "Fly",
+            bugCount: 10,
+            src: Fly,
+          },
+        ],
       },
       {
         name: "Hoverflies",
         description:
           "Harmless, nectar-feeding flies that mimic the stripes of bees and wasps to trick potential predators.",
-        samples: [],
+        samples: [
+          {
+            label: "Hover FLy",
+            bugCount: 3,
+            src: Hoverfly,
+          },
+        ],
       },
       {
         name: "Mosquitoes",
         description:
           "Slender, long-legged aquatic-breeding flies whose females use needle-like mouthparts to pierce skin for blood meals.",
-        samples: [],
+        samples: [
+          {
+            label: "Mosquitoes",
+            bugCount: 5,
+            src: Mosquito,
+          },
+        ],
       },
     ],
   },
@@ -181,13 +296,25 @@ const bugCategories: BugCategory[] = [
         name: "Wild & Giant Cockroaches",
         description:
           "Large, non-pest forest dwellers that serve as vital ecological recyclers by breaking down leaf litter and wood.",
-        samples: [],
+        samples: [
+          {
+            label: "Large Cockroach",
+            bugCount: 1,
+            src: CockroachLarge,
+          },
+        ],
       },
       {
         name: "Termites",
         description:
           "Eusocial insects famous for building massive mounds and consuming cellulose with the help of symbiotic gut microbes.",
-        samples: [],
+        samples: [
+          {
+            label: "Termite",
+            bugCount: 10,
+            src: Termite,
+          },
+        ],
       },
     ],
   },

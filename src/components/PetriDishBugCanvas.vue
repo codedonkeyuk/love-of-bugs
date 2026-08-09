@@ -21,7 +21,7 @@ interface BugCanvasProps {
 }
 
 const props = withDefaults(defineProps<BugCanvasProps>(), {
-  size: "450px",
+  size: "300px",
   bugCount: 5,
 });
 

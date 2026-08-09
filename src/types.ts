@@ -2,6 +2,7 @@ export interface Sample {
   label: string;
   bugCount: number;
   src: string;
+  size?: string;
 }
 
 export interface BugCategory {

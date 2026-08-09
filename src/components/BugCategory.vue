@@ -25,7 +25,7 @@ defineProps<{
         <div class="samples">
           <article v-for="sample in subcategory.samples">
             <PetriDishBugCanvas
-              size="250px"
+              :size="sample.size"
               :bugCount="sample.bugCount"
               :bugSvgUrl="sample.src"
               :label="sample.label"
