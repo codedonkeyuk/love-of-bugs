@@ -1,9 +1,6 @@
 <script setup>
-import PetriDishBugCanvas from "../components/PetriDishBugCanvas.vue";
-import Ladybug from "/ladybug-anim.png?url";
-import Cockroach from "/cockroach-anim.png?url";
-import Midge from "/midge.png?url";
-import Fly from "/fly.png?url";
+import BugCategory from "../components/BugCategory.vue";
+import bugCategories from "../data/BugCategories.js";
 </script>
 <template>
   <div class="page-container">
@@ -13,36 +10,15 @@ import Fly from "/fly.png?url";
       </header>
       <p>
         This page contains our entire bug archive. This page is split into
-        different categories and contains virtual samples of various bugs.
+        different categories, sub catogries and contains virtual samples of
+        various bugs.
       </p>
-      <article>
-        <h2>Cockroach</h2>
-        <p>There are about 30 different spiecies of Cockroach</p>
-        <div class="samples">
-          <PetriDishBugCanvas
-            size="250px"
-            :bugCount="1"
-            :bugSvgUrl="Cockroach"
-            label="cockroach"
-          />
-        </div>
-      </article>
-      <article>
-        <h2>Beatles</h2>
-        <p>
-          It took 3 days to build the intro page, mainly because I chose to draw
-          all the assets. I'll be rolling this out piece by piece over the next
-          few days.
-        </p>
-        <div class="samples">
-          <PetriDishBugCanvas
-            size="250px"
-            :bugCount="10"
-            :bugSvgUrl="Ladybug"
-            label="cockroach"
-          />
-        </div>
-      </article>
+      <BugCategory
+        v-for="bugCategory in bugCategories"
+        :name="bugCategory.name"
+        :description="bugCategory.description"
+        :subcategories="bugCategory.subcategories"
+      />
     </section>
   </div>
 </template>
@@ -57,15 +33,7 @@ import Fly from "/fly.png?url";
 }
 .card {
   padding: 15px;
-  max-width: 800px;
+  max-width: 1200px;
   background-color: var(--card-background);
-}
-
-.samples {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-end;
-  width: 100%;
 }
 </style>
