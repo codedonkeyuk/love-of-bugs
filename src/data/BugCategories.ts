@@ -1,5 +1,7 @@
 import Ladybug from "/ladybug-anim.png?url";
 import Cockroach from "/cockroach-anim.png?url";
+import StinkBug from "/stinkbug-anim.png?url";
+import Cicada from "/cicadas-anim.png?url";
 import type { BugCategory } from "../types";
 
 const bugCategories: BugCategory[] = [
@@ -12,13 +14,25 @@ const bugCategories: BugCategory[] = [
         name: "Stink Bugs",
         description:
           "Shield-shaped insects known for releasing a pungent, foul-smelling chemical deterrent when threatened or crushed.",
-        samples: [],
+        samples: [
+          {
+            label: "Convergent Lady Beetle",
+            bugCount: 4,
+            src: StinkBug,
+          },
+        ],
       },
       {
         name: "Cicadas",
         description:
           "Large, winged insects famous for the loud, buzzing mating songs produced by the vibrating tymbals of males.",
-        samples: [],
+        samples: [
+          {
+            label: "Cicada",
+            bugCount: 1,
+            src: Cicada,
+          },
+        ],
       },
       {
         name: "Aphids",
