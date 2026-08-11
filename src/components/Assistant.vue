@@ -93,6 +93,7 @@ watch(selectedMessage, async () => {
   justify-content: flex-start;
   align-items: flex-start;
   align-content: center;
+  width: 100%;
 }
 .assistant-avatar {
   border-radius: 8px;
@@ -105,6 +106,7 @@ watch(selectedMessage, async () => {
   height: 150px;
   margin-left: 10px;
   border-radius: 8px;
+  flex-grow: 1;
 }
 .assistant-buttonbar {
   width: 100%;
