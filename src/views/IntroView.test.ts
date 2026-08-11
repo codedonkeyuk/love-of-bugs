@@ -20,6 +20,7 @@ vi.mock("../components/Flowers.vue", () => ({
 
 const mockPush = vi.fn();
 vi.mock("vue-router", () => ({
+  RouterLink: () => {},
   useRouter: () => ({
     push: mockPush,
   }),

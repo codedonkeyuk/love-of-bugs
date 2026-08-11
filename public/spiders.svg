@@ -1,14 +1,5 @@
-<script setup>
-defineProps({
-  isNear: {
-    type: Boolean,
-    required: true,
-  },
-});
-</script>
-
-<template>
-  <svg
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
     class="spider-in-motion"
     :class="{ 'spider-drop': isNear }"
     width="320.5769"
@@ -232,71 +223,3 @@ defineProps({
       />
     </g>
   </svg>
-</template>
-<style>
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  width: 100%;
-  height: 100vh;
-}
-
-.spider-in-motion {
-  position: fixed;
-  z-index: 100;
-  top: -100vh;
-  right: 15vw;
-  width: 40vw;
-  display: none;
-  @media screen and (orientation: landscape) {
-    & {
-      width: 20vw;
-      right: 9vw;
-    }
-  }
-}
-
-.spider {
-  position: fixed;
-  z-index: 100;
-  top: 60vh;
-  right: 15vw;
-  width: 40vw;
-  visibility: hidden;
-  @media screen and (orientation: landscape) {
-    & {
-      width: 20vw;
-      right: 9vw;
-    }
-  }
-}
-
-.spider-drop {
-  display: block;
-  animation: spiderFall 0.2s linear forwards;
-}
-
-.show-spider {
-  display: block;
-  animation: revealSpider 0.1s linear 0.2s forwards;
-}
-
-@keyframes spiderFall {
-  0% {
-    top: -100px;
-  }
-  100% {
-    top: 50vh;
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes revealSpider {
-  to {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-</style>

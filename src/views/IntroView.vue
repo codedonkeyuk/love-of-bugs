@@ -1,10 +1,20 @@
-<script setup>
+<script setup lang="tsx">
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import AccessibleMarquee from "../components/AccessibleMarquee.vue";
 import DropSpider from "../components/DropSpider.vue";
 import Flowers from "../components/Flowers.vue";
 import Assistant from "../components/Assistant.vue";
+import type { AssistantMessage } from "../types.js";
+
+const assistantMessages: AssistantMessage[] = [
+  {
+    message:
+      "oh thats a furry spider, they should not be there. Don't worry we only spcialiase in bugs not arachnids. Hes just broke in. Select view catalog to continue.",
+    emotion: "shocked",
+    buttons: [{ name: "View Catalog", location: "/site" }],
+  },
+];
 
 const router = useRouter();
 const siteLink = ref(null);
@@ -70,14 +80,20 @@ onUnmounted(() => {
 <template>
   <div class="container">
     <AccessibleMarquee>
-      <a ref="siteLink" class="btn" href="/site" @click="handleLinkClick">
+      <a
+        ref="siteLink"
+        v-if="!isNear"
+        class="btn"
+        href="/site"
+        @click="handleLinkClick"
+      >
         Go to Site
       </a>
     </AccessibleMarquee>
     <Flowers :isNear="isNear" />
   </div>
   <DropSpider :isNear="isNear" />
-  <SpiderToast :show="isNear" />
+  <Assistant v-if="isNear" :messages="assistantMessages" />
 </template>
 
 <style>

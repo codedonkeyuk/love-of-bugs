@@ -29,7 +29,7 @@ describe("Flowers Component", () => {
 
     const svg = wrapper.find("svg.flowers");
     expect(svg.exists()).toBe(true);
-    expect(svg.attributes("viewBox")).toBe("0 0 185.21 264.58");
+    expect(svg.attributes("viewBox")).toBe("0 0 147.35514 261.75653");
   });
 
   it("handles butterfly class visibility based on globalState flags", async () => {
