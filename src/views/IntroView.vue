@@ -2,9 +2,9 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import AccessibleMarquee from "../components/AccessibleMarquee.vue";
-import SpiderToast from "../components/SpiderToast.vue";
 import DropSpider from "../components/DropSpider.vue";
 import Flowers from "../components/Flowers.vue";
+import Assistant from "../components/Assistant.vue";
 
 const router = useRouter();
 const siteLink = ref(null);

@@ -14,3 +14,9 @@ export interface BugCategory {
     samples: Sample[];
   }[];
 }
+
+export interface AssistantMessage {
+  message: string;
+  emotion: "happy" | "shocked";
+  buttons?: { name: string; location: string }[];
+}
