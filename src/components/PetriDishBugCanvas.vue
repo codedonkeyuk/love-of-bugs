@@ -57,8 +57,8 @@ let dishRadius = 0;
 
 const updateDishDimensions = () => {
   if (!app) return;
-  centerX = app.screen.width / 2;
-  centerY = app.screen.height / 2;
+  centerX = app?.screen?.width / 2;
+  centerY = app?.screen?.height / 2;
   dishRadius = Math.min(app.screen.width, app.screen.height) / 2;
 };
 

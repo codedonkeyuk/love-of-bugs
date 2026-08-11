@@ -13,7 +13,7 @@ describe("DropSpider Component", () => {
     const svgElement = wrapper.find("svg.spider");
 
     expect(svgElement.exists()).toBe(true);
-    expect(svgElement.attributes("viewBox")).toBe("0 0 84.819303 105.59651");
+    expect(svgElement.attributes("viewBox")).toBe("0 0 79.374998 79.375");
   });
 
   it("does not attach the 'spider-drop' animation class when isNear is false", () => {
@@ -23,7 +23,7 @@ describe("DropSpider Component", () => {
       },
     });
 
-    const svgElement = wrapper.find("svg.spider");
+    const svgElement = wrapper.find("svg.spider-in-motion");
     expect(svgElement.classes()).not.toContain("spider-drop");
   });
 
@@ -34,7 +34,7 @@ describe("DropSpider Component", () => {
       },
     });
 
-    const svgElement = wrapper.find("svg.spider");
+    const svgElement = wrapper.find("svg.spider-in-motion");
     expect(svgElement.classes()).toContain("spider-drop");
   });
 
@@ -45,7 +45,7 @@ describe("DropSpider Component", () => {
       },
     });
 
-    const svgElement = wrapper.find("svg.spider");
+    const svgElement = wrapper.find("svg.spider-in-motion");
     expect(svgElement.classes()).not.toContain("spider-drop");
 
     await wrapper.setProps({ isNear: true });
