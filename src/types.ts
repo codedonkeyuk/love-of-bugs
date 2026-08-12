@@ -18,5 +18,6 @@ export interface BugCategory {
 export interface AssistantMessage {
   message: string;
   emotion: "happy" | "shocked";
+  trigger?: () => void;
   buttons?: { name: string; location: string }[];
 }

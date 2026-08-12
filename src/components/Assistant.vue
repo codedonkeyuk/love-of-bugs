@@ -21,6 +21,11 @@ const { messages } = defineProps<Props>();
 const textRef = ref<HTMLElement | null>(null);
 
 watch(selectedMessage, async () => {
+  const activeMessage = messages[selectedMessage.value];
+
+  if (activeMessage && typeof activeMessage.trigger === "function") {
+    activeMessage.trigger();
+  }
   await nextTick();
   if (textRef.value) {
     textRef.value.focus();
@@ -86,6 +91,7 @@ watch(selectedMessage, async () => {
   border-radius: 8px;
   padding: 10px;
   row-gap: 10px;
+  z-index: 1000;
 }
 .assistant-content {
   display: flex;
