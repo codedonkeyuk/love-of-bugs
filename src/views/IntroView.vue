@@ -11,18 +11,24 @@ let isNear = ref(false);
 const assistantMessages: AssistantMessage[] = [
   {
     message:
-      "Thank goodness thats over, oh the HR manager is giving me daggers. I hope you enjoyed our unessessary corperate brain washing (wink, wink). I'm sure you apprcieated not being able to skip. Your time costs us nothing!",
+      "Hi, I'm Anthony your virtual guide. I hope you enjoyed our intoduction.",
     emotion: "happy",
     buttons: [],
   },
   {
     message:
-      "oh thats a furry spider, that should not be there. Don't worry we only specialiase in bugs not arachnids. Hes broke in for a snack. Select view catalog to continue.",
+      "We do not appologise for wasting your time. This is a free service and as such your time costs us nothing!",
+    emotion: "happy",
+    buttons: [],
+  },
+  {
+    message:
+      "oh thats a furry spider, hes an ugly bugger look at those eyes! Don't worry we only specialiase in bugs not arachnids. Hes broke in for a snack. Select view catalog to continue.",
     emotion: "shocked",
     trigger: () => {
       isNear.value = true;
     },
-    buttons: [{ name: "View Catalog", location: "/site" }],
+    buttons: [{ name: "Catalog", location: "/site" }],
   },
 ];
 </script>
@@ -43,8 +49,6 @@ const assistantMessages: AssistantMessage[] = [
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 100vh;
   @media screen and (orientation: landscape) {
     & {
       flex-direction: row;

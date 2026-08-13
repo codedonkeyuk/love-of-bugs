@@ -19,8 +19,12 @@ let selectedMessage = ref(0);
 const { messages } = defineProps<Props>();
 
 const textRef = ref<HTMLElement | null>(null);
+const showMessage = ref<boolean>(true);
 
 watch(selectedMessage, async () => {
+  if (!showMessage.value) {
+    showMessage.value = true;
+  }
   const activeMessage = messages[selectedMessage.value];
 
   if (activeMessage && typeof activeMessage.trigger === "function") {
@@ -35,92 +39,202 @@ watch(selectedMessage, async () => {
 
 <template>
   <div class="assistant" role="region" aria-label="Assistant Dialogue">
-    <div class="assistant-content">
-      <div class="assistant-avatar" role="presentation">
-        <img
-          :src="avatarEmotions[messages[selectedMessage].emotion]"
-          alt="Anthony the ant avatar"
-          class="assistant-avatar"
-        />
-      </div>
-      <div
-        ref="textRef"
-        class="assistant-text"
-        aria-live="polite"
-        aria-atomic="true"
-        tabindex="-1"
-        style="outline: none"
+    <div
+      ref="textRef"
+      class="assistant-bubble"
+      v-if="showMessage"
+      aria-live="polite"
+      aria-atomic="true"
+      tabindex="-1"
+      style="outline: none"
+    >
+      <button
+        class="close-bubble"
+        @click="showMessage = false"
+        aria-label="Close message bubble"
       >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="assistant-text">
         {{ messages[selectedMessage].message }}
       </div>
     </div>
-    <div class="assistant-buttonbar">
-      <RouterLink
-        v-for="button in messages[selectedMessage].buttons"
-        :key="button.name"
-        class="assistant__btn"
-        :to="button.location"
-      >
-        {{ button.name }}
-      </RouterLink>
-      <button
-        class="assistant__btn"
-        @click="selectedMessage++"
-        v-if="selectedMessage < messages.length - 1"
-        :aria-label="`Next message. Step ${selectedMessage + 1} of ${messages.length}`"
-      >
-        Next
-      </button>
+    <div class="assistant-avatar" role="presentation">
+      <img
+        :src="avatarEmotions[messages[selectedMessage].emotion]"
+        alt="Anthony the ant avatar"
+        class="assistant-avatar-image"
+      />
+      <div class="assistant-buttonbar">
+        <RouterLink
+          v-for="button in messages[selectedMessage].buttons"
+          :key="button.name"
+          class="assistant__btn"
+          :to="button.location"
+        >
+          {{ button.name }}
+        </RouterLink>
+        <button
+          class="assistant__btn"
+          @click="selectedMessage++"
+          v-if="selectedMessage < messages.length - 1"
+          :aria-label="`Next message. Step ${selectedMessage + 1} of ${messages.length}`"
+        >
+          Next
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <style>
 .assistant {
-  background-color: #00000095;
   position: fixed;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
   align-items: flex-start;
   align-content: center;
-  bottom: 5vh;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60vw;
+  top: 0px;
+  left: 0px;
+  width: 80vw;
   border-radius: 8px;
   padding: 10px;
-  row-gap: 10px;
+  gap: 10px;
   z-index: 1000;
 }
-.assistant-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-content: center;
-  width: 100%;
-}
+
 .assistant-avatar {
   border-radius: 8px;
 }
-.assistant-text {
+
+.assistant-avatar-image {
+  width: 160px;
+  height: auto;
+}
+
+.assistant-bubble:before {
+  content: "";
+  position: absolute;
+  right: -24px;
+  top: 15px;
+
+  border-width: 12px 0 12px 24px;
+  border-style: solid;
+  border-color: transparent transparent transparent transparent;
+  display: block;
+  width: 0;
+  height: 0;
+  z-index: 1;
+}
+
+.assistant-bubble {
+  position: relative;
+  text-align: left;
   background-color: white;
   padding: 5px;
-  border: 1px white solid;
+
   width: 100%;
-  height: 150px;
-  margin-left: 10px;
+  height: auto;
+
+  margin-left: 25px;
+  margin-right: 10px;
+
   border-radius: 8px;
   flex-grow: 1;
 }
-.assistant-buttonbar {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 20px 20px;
+
+.assistant-bubble:before {
+  content: "";
+  position: absolute;
+  left: -24px;
+
+  /* CENTERING FORMULA */
+  top: 50%; /* Puts the top edge of the arrow at exactly 50% height */
+  transform: translateY(
+    -50%
+  ); /* Pulls the arrow up by exactly half its own height */
+
+  border-width: 12px 24px 12px 0;
+  border-style: solid;
+  border-color: transparent transparent transparent transparent;
+  display: block;
+  width: 0;
+  height: 0;
+  z-index: 1;
 }
+
+/* 2. Inner White Triangle (Centered Vertically) */
+.assistant-bubble:after {
+  content: "";
+  position: absolute;
+  left: -19px;
+
+  /* CENTERING FORMULA */
+  top: 50%; /* Puts the top edge of the arrow at exactly 50% height */
+  transform: translateY(
+    -50%
+  ); /* Pulls the arrow up by exactly half its own height */
+
+  border-width: 12px 20px 12px 0;
+  border-style: solid;
+  border-color: transparent #ffffff transparent transparent;
+  display: block;
+  width: 0;
+  height: 0;
+  z-index: 2;
+}
+
+.assistant-text {
+  text-align: left;
+  margin: 10px 30px 10px 10px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.close-bubble {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 50%;
+
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+  cursor: pointer;
+  line-height: 1;
+
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
+  z-index: 10;
+}
+
+.close-bubble:hover {
+  background-color: #ff4d4d;
+  color: #ffffff;
+}
+
+.close-bubble:active {
+  transform: scale(0.92);
+}
+
+.close-bubble:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
 .assistant__btn {
   display: inline-block;
   box-sizing: border-box;
@@ -136,6 +250,7 @@ watch(selectedMessage, async () => {
   text-align: center;
   line-height: 1;
   margin: 0px 10px 10px 0px;
+  width: 100%;
 
   background-color: var(--button-background);
   color: var(--button-color);
@@ -168,14 +283,56 @@ watch(selectedMessage, async () => {
 
 @media (max-width: 768px) {
   .assistant {
+    top: auto;
     left: 5px;
     right: 5px;
     bottom: 5px;
     transform: translateX(0%);
     width: auto;
+    align-items: flex-end;
   }
   .assistant-content {
     width: 100%;
+  }
+  .assistant-avatar {
+    width: 100px;
+  }
+  .assistant-avatar-image {
+    width: 100px;
+  }
+  .assistant-bubble {
+    text-align: left;
+    margin-left: 25px;
+    margin-right: 10px;
+  }
+
+  .assistant-avatar-image {
+    width: 100px;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 480px) {
+  .assistant {
+    top: auto;
+    bottom: 0px;
+    left: 0px;
+    transform: translateX(0%);
+    width: 60vw;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+  }
+
+  .assistant-bubble {
+    text-align: left;
+    margin-left: 25px;
+    margin-right: 10px;
+  }
+
+  .assistant-avatar {
+    width: 100px;
+  }
+
+  .assistant-avatar-image {
+    width: 100px;
   }
 }
 </style>

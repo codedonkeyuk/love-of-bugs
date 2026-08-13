@@ -6495,22 +6495,16 @@ defineProps({
 </template>
 <style>
 .flowers-container {
-  padding: 0px;
-  margin: 0px;
-  width: 80vw;
-  height: auto;
-  @media screen and (orientation: landscape) {
-    & {
-      width: 30vw;
-    }
-  }
 }
 
 .flowers {
-  display: inline-block;
-  position: relative;
   width: 100%;
   height: auto;
+  @media screen and (orientation: landscape) {
+    & {
+      height: 100vh;
+    }
+  }
 }
 
 .butterfly-drop {

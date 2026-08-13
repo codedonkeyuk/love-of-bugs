@@ -1,16 +1,11 @@
 import { createRouter, createMemoryHistory } from "vue-router";
-import RootView from "./views/RootView.vue";
+import IntroView from "./views/IntroView.vue";
 
 const routes = [
   {
     path: "/",
     name: "root",
-    component: RootView,
-  },
-  {
-    path: "/intro",
-    name: "intro",
-    component: () => import("./views/IntroView.vue"),
+    component: IntroView,
   },
   {
     path: "/site",

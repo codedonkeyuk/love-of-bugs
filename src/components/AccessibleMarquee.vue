@@ -89,7 +89,6 @@ onUnmounted(() => stopTimer());
   padding: 1rem;
   border-radius: 4px;
   margin-top: 1.5rem;
-  width: 100vw;
   @media screen and (orientation: landscape) {
     & {
       margin-top: 0;
