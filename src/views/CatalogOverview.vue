@@ -2,16 +2,9 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import CatalogInterface from "../components/CatalogInterface.vue";
-import BugCategories from "../data/BugCategories.js";
+import Bugs from "../data/Bugs.js";
 
 const router = useRouter();
-
-const subcategories = BugCategories.flatMap((category) =>
-  category.subcategories.map((sub) => ({
-    subcategoryName: sub.name,
-    samples: sub.samples,
-  })),
-);
 
 const loadSample = () => {
   if (selectSample.value) {
@@ -35,14 +28,9 @@ const selectSample = ref(null);
         size="5"
         class="sample-select-list"
       >
-        <optgroup
-          :label="subcategory.subcategoryName"
-          v-for="subcategory in subcategories"
-        >
-          <option v-for="sample in subcategory.samples" :value="sample.id">
-            {{ sample.label }}
-          </option>
-        </optgroup>
+        <option v-for="bug in Bugs" :value="bug.id">
+          {{ bug.label }}
+        </option>
       </select>
       <button class="btn" @click="loadSample" :disabled="selectSample === null">
         Load Sample

@@ -8,11 +8,6 @@ const routes = [
     component: IntroView,
   },
   {
-    path: "/site",
-    name: "site",
-    component: () => import("./views/SiteView.vue"),
-  },
-  {
     path: "/catalog-overview",
     name: "CatalogOverview",
     component: () => import("./views/CatalogOverview.vue"),

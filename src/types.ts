@@ -1,6 +1,7 @@
-export interface Sample {
+export interface Bug {
   id: string;
   label: string;
+  subcategory: BugSubcategory;
   bugCount: number;
   src: string;
   size?: string;
@@ -9,11 +10,12 @@ export interface Sample {
 export interface BugCategory {
   name: string;
   description: string;
-  subcategories: {
-    name: string;
-    description: string;
-    samples: Sample[];
-  }[];
+}
+
+export interface BugSubcategory {
+  name: string;
+  description: string;
+  bugCategory: BugCategory;
 }
 
 export interface AssistantMessage {

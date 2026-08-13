@@ -1,11 +1,6 @@
 <template>
   <div ref="sceneContainer" class="petri-dish-scene">
-    <div class="petri-dish-rim">
-      <div ref="canvasContainer" class="petri-dish-basin">
-        <div class="glass-reflection-shine"></div>
-      </div>
-    </div>
-    <div class="sample-label">{{ label }}</div>
+    <div ref="canvasContainer" class="petri-dish-basin"></div>
   </div>
 </template>
 
@@ -15,7 +10,7 @@ import * as PIXI from "pixi.js";
 
 interface BugCanvasProps {
   size?: string;
-  bugSvgUrl: string; // IMPORTANT: drawn horizontally, facing directly to the right.
+  bugSvgUrl?: string; // IMPORTANT: drawn horizontally, facing directly to the right.
   bugCount?: number;
   label?: string;
 }
@@ -50,17 +45,6 @@ let behaviorIntervalId: number | null = null;
 const mousePos = { x: -9999, y: -9999 };
 let lastScrollY = window.scrollY;
 let isCurrentlyVisible = false;
-
-let centerX = 0;
-let centerY = 0;
-let dishRadius = 0;
-
-const updateDishDimensions = () => {
-  if (!app) return;
-  centerX = app?.screen?.width / 2;
-  centerY = app?.screen?.height / 2;
-  dishRadius = Math.min(app.screen.width, app.screen.height) / 2;
-};
 
 const triggerBugPanic = (targetBug: InteractiveBug, customAngle?: number) => {
   targetBug.currentState = "PANIC";
@@ -122,6 +106,10 @@ const updateBugLoop = (ticker: PIXI.Ticker) => {
   if (!app) return;
   const delta = ticker.deltaTime;
 
+  // Get current dimensions of the rectangular box
+  const boxWidth = app.screen.width;
+  const boxHeight = app.screen.height;
+
   allBugs.forEach((targetBug) => {
     const mDx = targetBug.x - mousePos.x;
     const mDy = targetBug.y - mousePos.y;
@@ -144,28 +132,27 @@ const updateBugLoop = (ticker: PIXI.Ticker) => {
     targetBug.y += Math.sin(targetBug.direction) * targetBug.speed * delta;
     targetBug.rotation = targetBug.direction;
 
-    const bDx = targetBug.x - centerX;
-    const bDy = targetBug.y - centerY;
-    const currentBugDistance = Math.sqrt(bDx * bDx + bDy * bDy);
-
+    // BOX CONSTRAINT CHECKS
     const bugRadius = Math.max(targetBug.width, targetBug.height) / 2;
-    const maxAllowedDistance = dishRadius - bugRadius;
 
-    if (currentBugDistance > maxAllowedDistance) {
-      const wallAngle = Math.atan2(bDy, bDx);
-      targetBug.x = centerX + Math.cos(wallAngle) * maxAllowedDistance;
-      targetBug.y = centerY + Math.sin(wallAngle) * maxAllowedDistance;
-      targetBug.direction = 2 * wallAngle - Math.PI - targetBug.direction;
+    // 1. Horizontal boundary collision (Left & Right Walls)
+    if (targetBug.x < bugRadius) {
+      targetBug.x = bugRadius;
+      targetBug.direction = Math.PI - targetBug.direction; // Flip X movement
+    } else if (targetBug.x > boxWidth - bugRadius) {
+      targetBug.x = boxWidth - bugRadius;
+      targetBug.direction = Math.PI - targetBug.direction; // Flip X movement
+    }
+
+    // 2. Vertical boundary collision (Top & Bottom Walls)
+    if (targetBug.y < bugRadius) {
+      targetBug.y = bugRadius;
+      targetBug.direction = -targetBug.direction; // Flip Y movement
+    } else if (targetBug.y > boxHeight - bugRadius) {
+      targetBug.y = boxHeight - bugRadius;
+      targetBug.direction = -targetBug.direction; // Flip Y movement
     }
   });
-};
-
-const handleResize = () => {
-  if (app && canvasContainer.value) {
-    const rect = canvasContainer.value.getBoundingClientRect();
-    app.renderer.resize(rect.width, rect.height);
-    updateDishDimensions();
-  }
 };
 
 onMounted(() => {
@@ -186,8 +173,6 @@ onMounted(() => {
     canvasContainer.value.appendChild(app.canvas);
 
     try {
-      updateDishDimensions();
-
       const texture = await PIXI.Assets.load<PIXI.Texture>(props.bugSvgUrl);
 
       const TOTAL_FRAMES = 4;
@@ -209,15 +194,21 @@ onMounted(() => {
         walkFrames.push(textureFrame);
       }
 
+      // Track box dimensions for positioning limits
+      const boxWidth = app.screen.width;
+      const boxHeight = app.screen.height;
+
       for (let i = 0; i < props.bugCount; i++) {
         const sprite = new PIXI.AnimatedSprite(walkFrames) as InteractiveBug;
 
         sprite.anchor.set(0.5);
 
-        const spawnRadius = Math.random() * (dishRadius * 0.6);
-        const spawnAngle = Math.random() * Math.PI * 2;
-        sprite.x = centerX + Math.cos(spawnAngle) * spawnRadius;
-        sprite.y = centerY + Math.sin(spawnAngle) * spawnRadius;
+        // BOX-BASED RANDOM SPAWN POSITION
+        const bugRadius = Math.max(FRAME_WIDTH, FRAME_HEIGHT) / 2;
+        const spawnMargin = bugRadius + 15; // Padding to ensure they don't clip walls on spawn
+
+        sprite.x = spawnMargin + Math.random() * (boxWidth - spawnMargin * 2);
+        sprite.y = spawnMargin + Math.random() * (boxHeight - spawnMargin * 2);
 
         sprite.currentState = "STILL";
         sprite.speed = 0;
@@ -253,7 +244,6 @@ onMounted(() => {
       app.ticker.add(updateBugLoop);
       behaviorIntervalId = window.setInterval(decideAllNextActions, 1500);
 
-      window.addEventListener("resize", handleResize);
       window.addEventListener("scroll", handlePageScroll, { passive: true });
 
       observer = new IntersectionObserver(
@@ -280,7 +270,6 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", handleResize);
   window.removeEventListener("scroll", handlePageScroll);
 
   if (observer && sceneContainer.value) {
@@ -305,12 +294,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.sample-label {
-  margin: 10px;
-  padding: 5px;
-  background-color: black;
-  color: white;
-}
 .petri-dish-scene {
   display: flex;
   flex-direction: column;
@@ -318,33 +301,14 @@ onUnmounted(() => {
   align-items: center;
 }
 .petri-dish-rim {
-  border: 10px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 .petri-dish-basin {
-  position: relative;
-  width: v-bind("props.size");
-  height: v-bind("props.size");
-  background: radial-gradient(
-    circle,
-    rgba(240, 248, 255, 0.1) 0%,
-    rgba(200, 220, 240, 0.2) 100%
-  );
-}
-.glass-reflection-shine {
+  z-index: 1000;
   position: absolute;
-  top: 5%;
-  left: 10%;
-  width: 80%;
-  height: 20%;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  border-radius: 50% / 100% 100% 0 0;
-  pointer-events: none;
+  top: 70px;
+  bottom: 60px;
+  left: 60px;
+  right: 57px;
 }
 </style>

@@ -94,18 +94,6 @@ describe("PetriDishBugCanvas.vue", () => {
     vi.unstubAllGlobals();
   });
 
-  it("respects custom size properties and renders the container elements properly", () => {
-    const wrapper = mount(PetriDishBugCanvas, {
-      props: {
-        size: "300px",
-        bugSvgUrl: "/logo-square.svg",
-      },
-    });
-
-    const rim = wrapper.find(".petri-dish-rim");
-    expect(rim.exists()).toBe(true);
-  });
-
   it("loads default values safely if properties are omitted", () => {
     const wrapper = mount(PetriDishBugCanvas, {
       props: {
@@ -124,16 +112,5 @@ describe("PetriDishBugCanvas.vue", () => {
     });
 
     expect(wrapper.exists()).toBe(true);
-  });
-
-  it("it outpusts the label name", () => {
-    const wrapper = mount(PetriDishBugCanvas, {
-      props: {
-        bugSvgUrl: "/logo-square.svg",
-        label: "I am a label",
-      },
-    });
-
-    expect(wrapper.find(".sample-label").text()).toBe("I am a label");
   });
 });
