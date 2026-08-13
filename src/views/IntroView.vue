@@ -28,7 +28,7 @@ const assistantMessages: AssistantMessage[] = [
     trigger: () => {
       isNear.value = true;
     },
-    buttons: [{ name: "Catalog", location: "/site" }],
+    buttons: [{ name: "Catalog", location: "/catalog-overview" }],
   },
 ];
 </script>
@@ -39,8 +39,8 @@ const assistantMessages: AssistantMessage[] = [
       <Assistant :messages="assistantMessages" />
     </AccessibleMarquee>
     <Flowers :isNear="isNear" />
+    <DropSpider :isNear="isNear" />
   </div>
-  <DropSpider :isNear="isNear" />
 </template>
 
 <style>
@@ -55,5 +55,44 @@ const assistantMessages: AssistantMessage[] = [
       justify-content: center;
     }
   }
+}
+/* Ensure the page wrapper covers the viewport and clips the curtain */
+.site-page-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #ffffff; /* Your page background color */
+}
+
+/* THE CURTAIN: A solid black box built directly onto the page wrapper */
+.site-page-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000; /* Choose your curtain color */
+  z-index: 99;
+}
+
+/* ==========================================
+   THE SLIDE-AWAY TRANSITION
+   ========================================== */
+
+/* Triggers when the page appears on screen */
+.reveal-page-enter-active:before {
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Starting State: The black box is fully covering the text */
+.reveal-page-enter-from:before {
+  transform: translateX(0);
+}
+
+/* Ending State: The black box slides completely off-screen to the left */
+.reveal-page-enter-to:before {
+  transform: translateX(-100%);
 }
 </style>

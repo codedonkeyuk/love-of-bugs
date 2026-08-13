@@ -1,4 +1,5 @@
 export interface Sample {
+  id: string;
   label: string;
   bugCount: number;
   src: string;

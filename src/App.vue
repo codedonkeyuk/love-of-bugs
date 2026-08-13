@@ -45,4 +45,12 @@
   outline: 3px solid var(--button-background-focus);
   outline-offset: 2px;
 }
+
+.btn:disabled {
+  background-color: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+  border-color: #cbd5e1;
+  box-shadow: none;
+}
 </style>

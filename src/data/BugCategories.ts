@@ -35,6 +35,7 @@ const bugCategories: BugCategory[] = [
           "Shield-shaped insects known for releasing a pungent, foul-smelling chemical deterrent when threatened or crushed.",
         samples: [
           {
+            id: "convergent-lady-beetle",
             label: "Convergent Lady Beetle",
             bugCount: 4,
             src: StinkBug,
@@ -47,6 +48,7 @@ const bugCategories: BugCategory[] = [
           "Large, winged insects famous for the loud, buzzing mating songs produced by the vibrating tymbals of males.",
         samples: [
           {
+            id: "cicada",
             label: "Cicada",
             bugCount: 1,
             src: Cicada,
@@ -60,6 +62,7 @@ const bugCategories: BugCategory[] = [
           "Tiny, soft-bodied garden pests that multiply rapidly and secrete a sticky, sweet fluid called honeydew.",
         samples: [
           {
+            id: "aphid",
             label: "Aphid",
             bugCount: 50,
             src: Aphid,
@@ -72,6 +75,7 @@ const bugCategories: BugCategory[] = [
           "Small, flat, wingless nocturnal parasites that hide in cracks and feed exclusively on warm-blooded hosts.",
         samples: [
           {
+            id: "bedbug",
             label: "Bed Bug",
             bugCount: 25,
             src: Bedbug,
@@ -91,6 +95,7 @@ const bugCategories: BugCategory[] = [
           "Domed, brightly coloured beetles that act as natural pest control by voraciously eating garden aphids.",
         samples: [
           {
+            id: "convergent-lady-beetle",
             label: "Convergent Lady Beetle",
             bugCount: 4,
             src: Ladybug,
@@ -103,6 +108,7 @@ const bugCategories: BugCategory[] = [
           "Herbivorous beetles most easily identified by their distinct, elongated snouts used to bore into seeds and grain.",
         samples: [
           {
+            id: "weevil",
             label: "Weevil",
             bugCount: 1,
             src: Weevil,
@@ -116,12 +122,14 @@ const bugCategories: BugCategory[] = [
           "Stout-bodied beetles with clubbed antennae, including ecological recyclers like dung rollers and massive horned species.",
         samples: [
           {
+            id: "scarab",
             label: "Scarab",
             bugCount: 1,
             src: Scarab,
             size: "500px",
           },
           {
+            id: "stag-beetle",
             label: "Stag Beetle",
             bugCount: 1,
             src: StagBettle,
@@ -135,6 +143,7 @@ const bugCategories: BugCategory[] = [
           "Fast-running, shiny, or metallic nocturnal predators that hunt heavily along the soil surface.",
         samples: [
           {
+            id: "ground-beetle",
             label: "Ground Beetle",
             bugCount: 5,
             src: GroundBeetle,
@@ -154,6 +163,7 @@ const bugCategories: BugCategory[] = [
           "Large, vividly patterned butterflies featuring elegant, tail-like extensions on their hindwings.",
         samples: [
           {
+            id: "shallow-tail",
             label: "Shallow Tail",
             bugCount: 1,
             src: Shallowtail,
@@ -167,6 +177,7 @@ const bugCategories: BugCategory[] = [
           "Heavy-bodied, powerful flyers with narrow wings, capable of hovering mid-air like hummingbirds to drink nectar.",
         samples: [
           {
+            id: "hawkmoth",
             label: "Hawk Moth",
             bugCount: 1,
             src: Hawkmoth,
@@ -180,6 +191,7 @@ const bugCategories: BugCategory[] = [
           "The largest butterfly family, named for their short, hairy front legs that look like small brushes.",
         samples: [
           {
+            id: "brush-footed-butterflies",
             label: "Brush-footed Butterflies",
             bugCount: 1,
             src: BrushFootedButterfly,
@@ -200,6 +212,7 @@ const bugCategories: BugCategory[] = [
           "Furry-bodied, pollen-collecting insects vital to global agriculture and the health of flowering plants.",
         samples: [
           {
+            id: "bee",
             label: "Bee",
             bugCount: 1,
             src: Bee,
@@ -212,6 +225,7 @@ const bugCategories: BugCategory[] = [
           "Eusocial, mostly wingless ground-dwellers known for complex trail systems, heavy lifting, and underground fortresses.",
         samples: [
           {
+            id: "ant",
             label: "Ant",
             bugCount: 1,
             src: Ant,
@@ -224,6 +238,7 @@ const bugCategories: BugCategory[] = [
           "Predatory or parasitic insects with smooth bodies, narrow waists, and potent, reusable defensive stingers.",
         samples: [
           {
+            id: "wasp",
             label: "Wasp",
             bugCount: 3,
             src: Wasp,
@@ -243,6 +258,7 @@ const bugCategories: BugCategory[] = [
           "Common worldwide scavengers with sponge-like mouthparts that rapidly liquefy food and spread pathogens.",
         samples: [
           {
+            id: "fly",
             label: "Fly",
             bugCount: 10,
             src: Fly,
@@ -255,7 +271,8 @@ const bugCategories: BugCategory[] = [
           "Harmless, nectar-feeding flies that mimic the stripes of bees and wasps to trick potential predators.",
         samples: [
           {
-            label: "Hover FLy",
+            id: "hover-fly",
+            label: "Hover Fly",
             bugCount: 3,
             src: Hoverfly,
           },
@@ -267,6 +284,7 @@ const bugCategories: BugCategory[] = [
           "Slender, long-legged aquatic-breeding flies whose females use needle-like mouthparts to pierce skin for blood meals.",
         samples: [
           {
+            id: "mosquito",
             label: "Mosquitoes",
             bugCount: 5,
             src: Mosquito,
@@ -286,6 +304,7 @@ const bugCategories: BugCategory[] = [
           "Highly adaptable, fast-moving household scavengers known for surviving harsh conditions and tight spaces.",
         samples: [
           {
+            id: "american-cockroach",
             label: "American Cockroach",
             bugCount: 2,
             src: Cockroach,
@@ -298,6 +317,7 @@ const bugCategories: BugCategory[] = [
           "Large, non-pest forest dwellers that serve as vital ecological recyclers by breaking down leaf litter and wood.",
         samples: [
           {
+            id: "large-cockroach",
             label: "Large Cockroach",
             bugCount: 1,
             src: CockroachLarge,
@@ -310,6 +330,7 @@ const bugCategories: BugCategory[] = [
           "Eusocial insects famous for building massive mounds and consuming cellulose with the help of symbiotic gut microbes.",
         samples: [
           {
+            id: "termite",
             label: "Termite",
             bugCount: 10,
             src: Termite,
