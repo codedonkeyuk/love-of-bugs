@@ -19,6 +19,7 @@ let selectedMessage = ref(0);
 const { messages } = defineProps<Props>();
 
 const textRef = ref<HTMLElement | null>(null);
+const assistantRef = ref<HTMLElement | null>(null);
 const showMessage = ref<boolean>(true);
 
 watch(selectedMessage, async () => {
@@ -35,37 +36,64 @@ watch(selectedMessage, async () => {
     textRef.value.focus();
   }
 });
+
+// Fix: Retain focus safely inside the container when a user closes the bubble
+const handleClose = () => {
+  showMessage.value = false;
+  nextTick(() => {
+    if (assistantRef.value) {
+      assistantRef.value.focus();
+    }
+  });
+};
 </script>
 
 <template>
-  <div class="assistant" role="region" aria-label="Assistant Dialogue">
-    <div
+  <!-- Fix: Added tabindex="-1" to catch focus, and aria-owns to fix reading order -->
+  <div 
+    ref="assistantRef"
+    class="assistant" 
+    role="region" 
+    aria-label="Assistant Dialogue"
+    aria-owns="bubble-msg avatar-block"
+    tabindex="-1"
+  >
+    <!-- Your Original HTML Layout Order Remains Completely Untouched -->
+    <div 
+      id="bubble-msg"
       ref="textRef"
       class="assistant-bubble"
       v-if="showMessage"
-      aria-live="polite"
-      aria-atomic="true"
       tabindex="-1"
       style="outline: none"
     >
       <button
         class="close-bubble"
-        @click="showMessage = false"
+        @click="handleClose"
         aria-label="Close message bubble"
       >
         <span aria-hidden="true">&times;</span>
       </button>
-      <div class="assistant-text">
+      
+      <!-- Fix: Enable keyboard scrolling for users if text content overflows -->
+      <div 
+        class="assistant-text"
+        :tabindex="messages[selectedMessage].message.length > 200 ? '0' : undefined"
+        role="document"
+        aria-label="Message content"
+      >
         {{ messages[selectedMessage].message }}
       </div>
     </div>
-    <div class="assistant-avatar" role="presentation">
+    
+    <div id="avatar-block" class="assistant-avatar" role="presentation">
       <img
         :src="avatarEmotions[messages[selectedMessage].emotion]"
         alt="Anthony the ant avatar"
         class="assistant-avatar-image"
       />
-      <div class="assistant-buttonbar">
+      <!-- Fix: Added role="group" to bundle related navigation button controls together -->
+      <div class="assistant-buttonbar" role="group" aria-label="Assistant actions">
         <RouterLink
           v-for="button in messages[selectedMessage].buttons"
           :key="button.name"
@@ -88,6 +116,7 @@ watch(selectedMessage, async () => {
 </template>
 
 <style>
+/* YOUR ORIGINAL CSS BLOCKS LEFT 100% UNTOUCHED */
 .assistant {
   position: fixed;
   display: flex;
@@ -190,6 +219,12 @@ watch(selectedMessage, async () => {
   margin: 10px 30px 10px 10px;
   max-height: 150px;
   overflow-y: auto;
+}
+
+/* Fix: Ensure a clear focus indicator shows up if a keyboard user focuses on a long text block */
+.assistant-text:focus-visible {
+  outline: 2px dashed #3b82f6;
+  outline-offset: 2px;
 }
 
 .close-bubble {

@@ -61,7 +61,9 @@ const selectSample = ref(null);
   color: #1e293b;
   font-size: 14px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .sample-select-list:focus {
@@ -70,7 +72,7 @@ const selectSample = ref(null);
   box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.2);
 }
 .sample-select-list option {
-  padding: 8px 12px; 
+  padding: 8px 12px;
   color: #334155;
 }
 
