@@ -32,6 +32,7 @@ body,
 }
 
 body {
+  touch-action: manipulation;
   font-family: Georgia, serif;
   font-size: 1.2rem;
   line-height: 1.625;
