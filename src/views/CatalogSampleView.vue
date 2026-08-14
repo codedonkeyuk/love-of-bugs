@@ -47,7 +47,7 @@ const targetBug = Bugs.find((bug) => bug.id === props.sampleId);
   box-sizing: border-box;
   border-width: 72px 56px 32px 32px;
   border-style: solid;
-  border-image-source: url("/bug-background.svg");
+  border-image-source: url("../assets/bug-background.svg");
   border-image-slice: 6.8% 5% 2.5% 2.8% fill;
   border-image-repeat: stretch;
   padding-top: 20px;

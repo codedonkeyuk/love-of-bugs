@@ -7,10 +7,11 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import * as PIXI from "pixi.js";
+import { bugImageModules } from "../data/Bugs";
 
 interface BugCanvasProps {
   size?: string;
-  bugSvgUrl?: string; // IMPORTANT: drawn horizontally, facing directly to the right.
+  bugSvgUrl: string; // IMPORTANT: drawn horizontally, facing directly to the right.
   bugCount?: number;
   label?: string;
 }
@@ -173,7 +174,16 @@ onMounted(() => {
     canvasContainer.value.appendChild(app.canvas);
 
     try {
-      const texture = await PIXI.Assets.load<PIXI.Texture>(props.bugSvgUrl);
+      const imageLoader = bugImageModules[props.bugSvgUrl];
+
+      let finalAssetSource = props.bugSvgUrl;
+
+      if (imageLoader) {
+        const module = (await imageLoader()) as { default: string };
+        finalAssetSource = module.default;
+      }
+
+      const texture = await PIXI.Assets.load<PIXI.Texture>(finalAssetSource);
 
       const TOTAL_FRAMES = 4;
       const FRAME_WIDTH = texture.width / TOTAL_FRAMES;

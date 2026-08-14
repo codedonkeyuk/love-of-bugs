@@ -1,26 +1,28 @@
-import Ant from "/ant-anim.png?url";
+const Ant = "../assets/ant-anim.png";
+const Aphid = "../assets/aphid-anim.png";
+const Bee = "../assets/bee-anim.png";
+const Bedbug = "../assets/bedbug-anim.png";
+const BrushFootedButterfly = "../assets/brush-footed-butterfly-anim.png";
+const CockroachLarge = "../assets/cockroach-large-anim.png";
+const Fly = "../assets/fly-anim.png";
+const GroundBeetle = "../assets/ground-beetle-anim.png";
+const Hawkmoth = "../assets/hawkmoth-anim.png";
+const Hoverfly = "../assets/hoverfly-anim.png";
+const Mosquito = "../assets/mosquito-anim.png";
+const Scarab = "../assets/scarab-anim.png";
+const Shallowtail = "../assets/shallowtail-anim.png";
+const StagBettle = "../assets/stag-beetle-anim.png";
+const Termite = "../assets/termite-anim.png";
+const Wasp = "../assets/wasp-anim.png";
+const Weevil = "../assets/weevil-anim.png";
 
-import Aphid from "/aphid-anim.png?url";
-import Bee from "/bee-anim.png?url";
-import Bedbug from "/bedbug-anim.png?url";
-import BrushFootedButterfly from "/brush-footed-butterfly-anim.png?url";
-import CockroachLarge from "/cockroach-large-anim.png?url";
-import Fly from "/fly-anim.png?url";
-import GroundBeetle from "/ground-beetle-anim.png?url";
-import Hawkmoth from "/hawkmoth-anim.png?url";
-import Hoverfly from "/hoverfly-anim.png?url";
-import Mosquito from "/mosquito-anim.png?url";
-import Scarab from "/scarab-anim.png?url";
-import Shallowtail from "/shallowtail-anim.png?url";
-import StagBettle from "/stag-beetle-anim.png?url";
-import Termite from "/termite-anim.png?url";
-import Wasp from "/wasp-anim.png?url";
-import Weevil from "/weevil-anim.png?url";
+const Ladybug = "../assets/ladybug-anim.png";
+const Cockroach = "../assets/cockroach-anim.png";
+const StinkBug = "../assets/stinkbug-anim.png";
+const Cicada = "../assets/cicadas-anim.png";
 
-import Ladybug from "/ladybug-anim.png?url";
-import Cockroach from "/cockroach-anim.png?url";
-import StinkBug from "/stinkbug-anim.png?url";
-import Cicada from "/cicadas-anim.png?url";
+export const bugImageModules = import.meta.glob("../assets/*-anim.png");
+
 import type { BugSubcategory, BugCategory, Bug } from "../types";
 
 const bugCategories: Record<string, BugCategory> = {

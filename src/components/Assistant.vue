@@ -1,8 +1,8 @@
 <script setup lang="tsx">
 import { ref, watch, nextTick } from "vue";
 import { RouterLink } from "vue-router";
-import AnthonyHappy from "/anthony-happy.png?url";
-import AnthonyShocked from "/anthony-shocked.png?url";
+import AnthonyHappy from "../assets/anthony-happy.png";
+import AnthonyShocked from "../assets/anthony-shocked.png";
 import type { AssistantMessage } from "../types";
 
 const avatarEmotions = {
