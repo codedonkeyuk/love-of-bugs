@@ -23,7 +23,7 @@ const assistantMessages: AssistantMessage[] = [
   },
   {
     message:
-      "oh thats a furry spider, hes an ugly sod, look at those dead eyes! Don't worry, we only specialiase in bugs not arachnids. So lets go!",
+      "oh thats a furry spider, he is an ugly sod, look at those black eyes! Don't worry we only specialise in bugs not arachnids. So lets go!",
     emotion: "shocked",
     trigger: () => {
       isNear.value = true;
