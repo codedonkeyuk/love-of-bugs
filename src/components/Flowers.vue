@@ -6494,12 +6494,15 @@ defineProps({
   </div>
 </template>
 <style>
-.flowers-container {
-}
-
 .flowers {
-  width: 100%;
+  width: 35vw;
   height: auto;
+
+  @media (max-width: 768px) {
+    & {
+      width: 70vw;
+    }
+  }
   @media screen and (orientation: landscape) {
     & {
       height: 100vh;

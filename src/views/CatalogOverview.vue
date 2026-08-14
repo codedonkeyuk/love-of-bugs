@@ -44,26 +44,18 @@ const selectSample = ref(null);
   flex-direction: column;
   gap: 8px;
   max-width: 320px;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
 }
 
 .select-label {
   font-size: 14px;
   font-weight: 600;
-  color: #334155;
 }
 
 .sample-select-list {
   accent-color: var(--button-background);
   width: 100%;
   padding: 6px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #000000;
   border-radius: 8px;
   background-color: #ffffff;
   color: #1e293b;
@@ -78,19 +70,6 @@ const selectSample = ref(null);
 .sample-select-list:focus {
   border-color: var(--button-background);
   box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.2);
-}
-
-.sample-select-list optgroup {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: #64748b;
-  margin-top: 10px;
-  margin-bottom: 4px;
-}
-
-.sample-select-list optgroup:first-of-type {
-  margin-top: 4px;
 }
 
 .sample-select-list option {

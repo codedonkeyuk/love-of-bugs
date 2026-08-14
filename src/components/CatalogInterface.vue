@@ -1,7 +1,8 @@
 <template>
   <div class="catalog-interface-container">
     <div class="catalog-interface-container-terminal">
-      <slot> Fetching Sample.. </slot>
+      <h2>Bug Archive</h2>
+      <slot>Loading...</slot>
     </div>
   </div>
 </template>
@@ -24,12 +25,11 @@
 }
 
 .catalog-interface-container-terminal {
-  border: 5px solid white;
+  border: 1px solid #000000;
   color: var(--main-color);
   border-radius: 10px;
   padding: 15px;
   width: 250px;
-  height: 250px;
   background-color: var(--card-background);
 }
 </style>

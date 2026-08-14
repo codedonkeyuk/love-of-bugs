@@ -47,7 +47,7 @@ const assistantMessages: AssistantMessage[] = [
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   @media screen and (orientation: landscape) {
     & {

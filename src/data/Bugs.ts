@@ -191,7 +191,7 @@ const bugs: Bug[] = [
   {
     id: "weevil",
     label: "Weevil",
-    bugCount: 25,
+    bugCount: 2,
     src: "../assets/weevil-anim.png",
     size: "500px",
     subcategory: bugSubcategories.weevils,
@@ -199,7 +199,7 @@ const bugs: Bug[] = [
   {
     id: "scarab",
     label: "Scarab",
-    bugCount: 5,
+    bugCount: 2,
     src: "../assets/scarab-anim.png",
     size: "500px",
     subcategory: bugSubcategories.scarabBeetles,
@@ -207,7 +207,7 @@ const bugs: Bug[] = [
   {
     id: "stag-beetle",
     label: "Stag Beetle",
-    bugCount: 5,
+    bugCount: 2,
     src: "../assets/stag-beetle-anim.png",
     size: "500px",
     subcategory: bugSubcategories.scarabBeetles,
@@ -215,14 +215,14 @@ const bugs: Bug[] = [
   {
     id: "ground-beetle",
     label: "Ground Beetle",
-    bugCount: 5,
+    bugCount: 25,
     src: "../assets/ground-beetle-anim.png",
     subcategory: bugSubcategories.groundBeetles,
   },
   {
     id: "shallow-tail",
     label: "Shallow Tail",
-    bugCount: 5,
+    bugCount: 1,
     src: "../assets/shallowtail-anim.png",
     size: "500px",
     subcategory: bugSubcategories.swallowtails,
@@ -230,7 +230,7 @@ const bugs: Bug[] = [
   {
     id: "hawkmoth",
     label: "Hawk Moth",
-    bugCount: 5,
+    bugCount: 1,
     src: "../assets/hawkmoth-anim.png",
     size: "500px",
     subcategory: bugSubcategories.hawkMoths,
@@ -238,7 +238,7 @@ const bugs: Bug[] = [
   {
     id: "brush-footed-butterflies",
     label: "Brush-footed Butterflies",
-    bugCount: 5,
+    bugCount: 1,
     src: "../assets/brush-footed-butterfly-anim.png",
     size: "500px",
     subcategory: bugSubcategories.brushFootedButterflies,
@@ -246,7 +246,7 @@ const bugs: Bug[] = [
   {
     id: "bee",
     label: "Bee",
-    bugCount: 25,
+    bugCount: 20,
     src: "../assets/bee-anim.png",
     subcategory: bugSubcategories.bees,
   },
@@ -260,7 +260,7 @@ const bugs: Bug[] = [
   {
     id: "wasp",
     label: "Wasp",
-    bugCount: 25,
+    bugCount: 20,
     src: "../assets/wasp-anim.png",
     subcategory: bugSubcategories.waspsHornets,
   },
@@ -276,7 +276,7 @@ const bugs: Bug[] = [
     label: "Hover Fly",
     bugCount: 25,
     src: "../assets/hoverfly-anim.png",
-    subcategory: bugSubcategories.hoverFly,
+    subcategory: bugSubcategories.hoverflies,
   },
   {
     id: "mosquito",
@@ -288,7 +288,7 @@ const bugs: Bug[] = [
   {
     id: "american-cockroach",
     label: "American Cockroach",
-    bugCount: 25,
+    bugCount: 20,
     src: "../assets/cockroach-anim.png",
     subcategory: bugSubcategories.pestCockroaches,
   },
@@ -302,7 +302,7 @@ const bugs: Bug[] = [
   {
     id: "termite",
     label: "Termite",
-    bugCount: 25,
+    bugCount: 100,
     src: "../assets/termite-anim.png",
     subcategory: bugSubcategories.termites,
   },
