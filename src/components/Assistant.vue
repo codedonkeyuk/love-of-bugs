@@ -50,16 +50,16 @@ const handleClose = () => {
 
 <template>
   <!-- Fix: Added tabindex="-1" to catch focus, and aria-owns to fix reading order -->
-  <div 
+  <div
     ref="assistantRef"
-    class="assistant" 
-    role="region" 
+    class="assistant"
+    role="region"
     aria-label="Assistant Dialogue"
     aria-owns="bubble-msg avatar-block"
     tabindex="-1"
   >
     <!-- Your Original HTML Layout Order Remains Completely Untouched -->
-    <div 
+    <div
       id="bubble-msg"
       ref="textRef"
       class="assistant-bubble"
@@ -74,18 +74,20 @@ const handleClose = () => {
       >
         <span aria-hidden="true">&times;</span>
       </button>
-      
+
       <!-- Fix: Enable keyboard scrolling for users if text content overflows -->
-      <div 
+      <div
         class="assistant-text"
-        :tabindex="messages[selectedMessage].message.length > 200 ? '0' : undefined"
+        :tabindex="
+          messages[selectedMessage].message.length > 200 ? '0' : undefined
+        "
         role="document"
         aria-label="Message content"
       >
         {{ messages[selectedMessage].message }}
       </div>
     </div>
-    
+
     <div id="avatar-block" class="assistant-avatar" role="presentation">
       <img
         :src="avatarEmotions[messages[selectedMessage].emotion]"
@@ -93,7 +95,11 @@ const handleClose = () => {
         class="assistant-avatar-image"
       />
       <!-- Fix: Added role="group" to bundle related navigation button controls together -->
-      <div class="assistant-buttonbar" role="group" aria-label="Assistant actions">
+      <div
+        class="assistant-buttonbar"
+        role="group"
+        aria-label="Assistant actions"
+      >
         <RouterLink
           v-for="button in messages[selectedMessage].buttons"
           :key="button.name"
