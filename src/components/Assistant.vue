@@ -37,7 +37,6 @@ watch(selectedMessage, async () => {
   }
 });
 
-// Fix: Retain focus safely inside the container when a user closes the bubble
 const handleClose = () => {
   showMessage.value = false;
   nextTick(() => {
@@ -49,7 +48,6 @@ const handleClose = () => {
 </script>
 
 <template>
-  <!-- Fix: Added tabindex="-1" to catch focus, and aria-owns to fix reading order -->
   <div
     ref="assistantRef"
     class="assistant"
@@ -58,7 +56,6 @@ const handleClose = () => {
     aria-owns="bubble-msg avatar-block"
     tabindex="-1"
   >
-    <!-- Your Original HTML Layout Order Remains Completely Untouched -->
     <div
       id="bubble-msg"
       ref="textRef"
@@ -75,7 +72,6 @@ const handleClose = () => {
         <span aria-hidden="true">&times;</span>
       </button>
 
-      <!-- Fix: Enable keyboard scrolling for users if text content overflows -->
       <div
         class="assistant-text"
         :tabindex="
@@ -94,7 +90,6 @@ const handleClose = () => {
         alt="Anthony the ant avatar"
         class="assistant-avatar-image"
       />
-      <!-- Fix: Added role="group" to bundle related navigation button controls together -->
       <div
         class="assistant-buttonbar"
         role="group"
@@ -122,7 +117,6 @@ const handleClose = () => {
 </template>
 
 <style>
-/* YOUR ORIGINAL CSS BLOCKS LEFT 100% UNTOUCHED */
 .assistant {
   position: fixed;
   display: flex;
@@ -183,12 +177,8 @@ const handleClose = () => {
   content: "";
   position: absolute;
   left: -24px;
-
-  /* CENTERING FORMULA */
-  top: 50%; /* Puts the top edge of the arrow at exactly 50% height */
-  transform: translateY(
-    -50%
-  ); /* Pulls the arrow up by exactly half its own height */
+  top: 50%;
+  transform: translateY(-50%);
 
   border-width: 12px 24px 12px 0;
   border-style: solid;
@@ -199,18 +189,12 @@ const handleClose = () => {
   z-index: 1;
 }
 
-/* 2. Inner White Triangle (Centered Vertically) */
 .assistant-bubble:after {
   content: "";
   position: absolute;
   left: -19px;
-
-  /* CENTERING FORMULA */
-  top: 50%; /* Puts the top edge of the arrow at exactly 50% height */
-  transform: translateY(
-    -50%
-  ); /* Pulls the arrow up by exactly half its own height */
-
+  top: 50%;
+  transform: translateY(-50%);
   border-width: 12px 20px 12px 0;
   border-style: solid;
   border-color: transparent #ffffff transparent transparent;
@@ -226,8 +210,6 @@ const handleClose = () => {
   max-height: 150px;
   overflow-y: auto;
 }
-
-/* Fix: Ensure a clear focus indicator shows up if a keyboard user focuses on a long text block */
 .assistant-text:focus-visible {
   outline: 2px dashed #3b82f6;
   outline-offset: 2px;

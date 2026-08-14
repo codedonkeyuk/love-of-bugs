@@ -8,14 +8,14 @@ const routes = [
     component: IntroView,
   },
   {
-    path: "/catalog-overview",
-    name: "CatalogOverview",
-    component: () => import("./views/CatalogOverview.vue"),
+    path: "/bug-archive",
+    name: "Bug Archive",
+    component: () => import("./views/BugArchive.vue"),
   },
   {
-    path: "/catalog-sample-view/:sampleId",
-    name: "CatalogSampleView",
-    component: () => import("./views/CatalogSampleView.vue"),
+    path: "/bug-archive/:sampleId",
+    name: "Bug Archive Bug Box",
+    component: () => import("./views/BugBox.vue"),
     props: true,
   },
 ];

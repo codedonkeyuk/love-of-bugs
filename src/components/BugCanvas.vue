@@ -11,7 +11,7 @@ import { bugImageModules } from "../data/Bugs";
 
 interface BugCanvasProps {
   size?: string;
-  bugSvgUrl: string; // IMPORTANT: drawn horizontally, facing directly to the right.
+  bugSvgUrl: string;
   bugCount?: number;
   label?: string;
 }
@@ -107,7 +107,6 @@ const updateBugLoop = (ticker: PIXI.Ticker) => {
   if (!app) return;
   const delta = ticker.deltaTime;
 
-  // Get current dimensions of the rectangular box
   const boxWidth = app.screen.width;
   const boxHeight = app.screen.height;
 
@@ -133,25 +132,22 @@ const updateBugLoop = (ticker: PIXI.Ticker) => {
     targetBug.y += Math.sin(targetBug.direction) * targetBug.speed * delta;
     targetBug.rotation = targetBug.direction;
 
-    // BOX CONSTRAINT CHECKS
     const bugRadius = Math.max(targetBug.width, targetBug.height) / 2;
 
-    // 1. Horizontal boundary collision (Left & Right Walls)
     if (targetBug.x < bugRadius) {
       targetBug.x = bugRadius;
-      targetBug.direction = Math.PI - targetBug.direction; // Flip X movement
+      targetBug.direction = Math.PI - targetBug.direction;
     } else if (targetBug.x > boxWidth - bugRadius) {
       targetBug.x = boxWidth - bugRadius;
-      targetBug.direction = Math.PI - targetBug.direction; // Flip X movement
+      targetBug.direction = Math.PI - targetBug.direction;
     }
 
-    // 2. Vertical boundary collision (Top & Bottom Walls)
     if (targetBug.y < bugRadius) {
       targetBug.y = bugRadius;
-      targetBug.direction = -targetBug.direction; // Flip Y movement
+      targetBug.direction = -targetBug.direction;
     } else if (targetBug.y > boxHeight - bugRadius) {
       targetBug.y = boxHeight - bugRadius;
-      targetBug.direction = -targetBug.direction; // Flip Y movement
+      targetBug.direction = -targetBug.direction;
     }
   });
 };
@@ -204,7 +200,6 @@ onMounted(() => {
         walkFrames.push(textureFrame);
       }
 
-      // Track box dimensions for positioning limits
       const boxWidth = app.screen.width;
       const boxHeight = app.screen.height;
 
@@ -213,9 +208,8 @@ onMounted(() => {
 
         sprite.anchor.set(0.5);
 
-        // BOX-BASED RANDOM SPAWN POSITION
         const bugRadius = Math.max(FRAME_WIDTH, FRAME_HEIGHT) / 2;
-        const spawnMargin = bugRadius + 15; // Padding to ensure they don't clip walls on spawn
+        const spawnMargin = bugRadius + 15;
 
         sprite.x = spawnMargin + Math.random() * (boxWidth - spawnMargin * 2);
         sprite.y = spawnMargin + Math.random() * (boxHeight - spawnMargin * 2);

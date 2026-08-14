@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { mount } from "@vue/test-utils";
-import MarqueeComponent from "./AccessibleMarquee.vue";
+import FlowersComponent from "./FlowersMarquee.vue";
 
 const mocks = await vi.hoisted(async () => {
   const { reactive } = await import("vue");
@@ -32,13 +32,13 @@ describe("Marquee Component", () => {
   });
 
   it("renders the initial message on mount and calls nextMessage", () => {
-    const wrapper = mount(MarqueeComponent);
+    const wrapper = mount(FlowersComponent);
     expect(mocks.mockNextMessage).toHaveBeenCalledTimes(1);
     expect(wrapper.find(".marquee-text").text()).toBe("Initial Announcement");
   });
 
   it("advances messages on a 5000ms timer cycle with animations", async () => {
-    const wrapper = mount(MarqueeComponent);
+    const wrapper = mount(FlowersComponent);
     await vi.advanceTimersByTimeAsync(5000);
     expect(wrapper.find(".marquee-content").classes()).toContain("fade-out");
 
@@ -50,7 +50,7 @@ describe("Marquee Component", () => {
   });
 
   it("toggles the timer interval and updates text layout on button click", async () => {
-    const wrapper = mount(MarqueeComponent);
+    const wrapper = mount(FlowersComponent);
     const button = wrapper.find("button.btn");
 
     expect(button.text()).toBe("Pause");
@@ -67,7 +67,7 @@ describe("Marquee Component", () => {
   });
 
   it("stops rotating and unmounts button frame when finished state is reached", async () => {
-    const wrapper = mount(MarqueeComponent, {
+    const wrapper = mount(FlowersComponent, {
       slots: {
         default: '<div class="slotted-content">Complete!</div>',
       },

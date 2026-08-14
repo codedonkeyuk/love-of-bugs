@@ -32,7 +32,7 @@ if (!targetBug) {
             {{ targetBug.subcategory.bugCategory.name }}.
             {{ targetBug.subcategory.bugCategory.description }}
           </p>
-          <RouterLink class="btn return-button" to="/catalog-overview">
+          <RouterLink class="btn return-button" to="/bug-archive">
             Return to Menu
           </RouterLink>
         </div>

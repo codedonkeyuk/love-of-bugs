@@ -12,6 +12,8 @@ defineProps({
   <div class="flowers-container">
     <svg
       class="flowers"
+      role="img"
+      aria-labelledby="svg-title svg-desc"
       width="556.9278"
       height="989.32849"
       version="1.1"
@@ -23,6 +25,12 @@ defineProps({
       xmlns:svg="http://www.w3.org/2000/svg"
     >
       <defs id="defs187">
+        <title id="svg-title">Flowers and Bugs</title>
+        <desc id="svg-desc">
+          An animated image that shows Lady Bird, a Bee, and a butterfly. In
+          sequence with the poem.
+        </desc>
+
         <filter
           style="color-interpolation-filters: sRGB"
           id="filter9"
