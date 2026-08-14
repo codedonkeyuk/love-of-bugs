@@ -9,12 +9,12 @@ const routes = [
   },
   {
     path: "/bug-archive",
-    name: "Bug Archive",
+    name: "BugArchive",
     component: () => import("./views/BugArchive.vue"),
   },
   {
     path: "/bug-archive/:sampleId",
-    name: "Bug Archive Bug Box",
+    name: "BugArchiveBugBox",
     component: () => import("./views/BugBox.vue"),
     props: true,
   },

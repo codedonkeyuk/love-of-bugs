@@ -9,7 +9,7 @@ const router = useRouter();
 const loadSample = () => {
   if (selectSample.value) {
     router.push({
-      name: "CatalogSampleView",
+      name: "BugArchiveBugBox",
       params: { sampleId: selectSample.value },
     });
   }
