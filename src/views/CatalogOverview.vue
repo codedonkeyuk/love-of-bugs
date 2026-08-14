@@ -60,26 +60,18 @@ const selectSample = ref(null);
   background-color: #ffffff;
   color: #1e293b;
   font-size: 14px;
-  outline: none;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .sample-select-list:focus {
-  border-color: var(--button-background);
+  outline: 2px solid var(--button-background);
+  outline-offset: 2px;
   box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.2);
 }
-
 .sample-select-list option {
-  padding: 8px 12px;
-  margin-top: 2px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 400;
+  padding: 8px 12px; 
   color: #334155;
-  cursor: pointer;
 }
 
 .sample-select-list option:checked,

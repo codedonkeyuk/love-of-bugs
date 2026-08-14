@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import PetriDishBugCanvas from "../components/PetriDishBugCanvas.vue";
+import BugCanvas from "../components/BugCanvas.vue";
 import type { Sample } from "../types";
 
-// TODO: Figure out a better fix. Vue does not allow me to use BugCategory type in defiend props!
 defineProps<{
   name: string;
   description: string;
@@ -24,7 +23,7 @@ defineProps<{
         <p>{{ subcategory.description }}</p>
         <div class="samples">
           <article v-for="sample in subcategory.samples">
-            <PetriDishBugCanvas
+            <BugCanvas
               :size="sample.size"
               :bugCount="sample.bugCount"
               :bugSvgUrl="sample.src"

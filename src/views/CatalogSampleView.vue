@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import CatalogWrapper from "../components/CatalogWrapper.vue";
-import PetriDishBugCanvas from "../components/PetriDishBugCanvas.vue";
+import BugCanvas from "../components/BugCanvas.vue";
 import Bugs from "../data/Bugs.js";
 
 const props = defineProps<{
@@ -37,7 +37,7 @@ if (!targetBug) {
           </RouterLink>
         </div>
       </div>
-      <PetriDishBugCanvas
+      <BugCanvas
         :size="targetBug.size"
         :bugCount="targetBug.bugCount"
         :bugSvgUrl="targetBug.src"

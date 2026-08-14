@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { mount } from "@vue/test-utils";
-import PetriDishBugCanvas from "./PetriDishBugCanvas.vue";
+import BugCanvas from "./BugCanvas.vue";
 
 vi.mock("pixi.js", () => {
   class MockTexture {
@@ -60,7 +60,7 @@ vi.mock("pixi.js", () => {
   };
 });
 
-describe("PetriDishBugCanvas.vue", () => {
+describe("BugCanvas.vue", () => {
   let mockRectSpy: any;
 
   beforeEach(() => {
@@ -95,7 +95,7 @@ describe("PetriDishBugCanvas.vue", () => {
   });
 
   it("loads default values safely if properties are omitted", () => {
-    const wrapper = mount(PetriDishBugCanvas, {
+    const wrapper = mount(BugCanvas, {
       props: {
         bugSvgUrl: "/logo-square.svg",
       },
@@ -105,7 +105,7 @@ describe("PetriDishBugCanvas.vue", () => {
   });
 
   it("completes layout setup steps smoothly upon execution cycles", () => {
-    const wrapper = mount(PetriDishBugCanvas, {
+    const wrapper = mount(BugCanvas, {
       props: {
         bugSvgUrl: "/logo-square.svg",
       },
