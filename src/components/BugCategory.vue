@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BugCanvas from "../components/BugCanvas.vue";
-import type { Sample } from "../types";
+import type { Bug } from "../types";
 
 defineProps<{
   name: string;
@@ -8,7 +8,7 @@ defineProps<{
   subcategories: {
     name: string;
     description: string;
-    samples: Sample[];
+    samples: Bug[];
   }[];
 }>();
 </script>
