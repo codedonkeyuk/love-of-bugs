@@ -60,6 +60,7 @@ const selectSample = ref(null);
 }
 
 .sample-select-list {
+  accent-color: var(--button-background);
   width: 100%;
   padding: 6px;
   border: 1px solid #cbd5e1;
@@ -75,8 +76,8 @@ const selectSample = ref(null);
 }
 
 .sample-select-list:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  border-color: var(--button-background);
+  box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.2);
 }
 
 .sample-select-list optgroup {
@@ -100,5 +101,17 @@ const selectSample = ref(null);
   font-weight: 400;
   color: #334155;
   cursor: pointer;
+}
+
+.sample-select-list option:checked,
+.sample-select-list option:hover {
+  background-color: var(--button-background);
+  background: var(--button-background)
+    linear-gradient(
+      0deg,
+      var(--button-background) 0%,
+      var(--button-background) 100%
+    );
+  color: #ffffff;
 }
 </style>
