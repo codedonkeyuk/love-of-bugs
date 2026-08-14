@@ -1,26 +1,3 @@
-const Ant = "../assets/ant-anim.png";
-const Aphid = "../assets/aphid-anim.png";
-const Bee = "../assets/bee-anim.png";
-const Bedbug = "../assets/bedbug-anim.png";
-const BrushFootedButterfly = "../assets/brush-footed-butterfly-anim.png";
-const CockroachLarge = "../assets/cockroach-large-anim.png";
-const Fly = "../assets/fly-anim.png";
-const GroundBeetle = "../assets/ground-beetle-anim.png";
-const Hawkmoth = "../assets/hawkmoth-anim.png";
-const Hoverfly = "../assets/hoverfly-anim.png";
-const Mosquito = "../assets/mosquito-anim.png";
-const Scarab = "../assets/scarab-anim.png";
-const Shallowtail = "../assets/shallowtail-anim.png";
-const StagBettle = "../assets/stag-beetle-anim.png";
-const Termite = "../assets/termite-anim.png";
-const Wasp = "../assets/wasp-anim.png";
-const Weevil = "../assets/weevil-anim.png";
-
-const Ladybug = "../assets/ladybug-anim.png";
-const Cockroach = "../assets/cockroach-anim.png";
-const StinkBug = "../assets/stinkbug-anim.png";
-const Cicada = "../assets/cicadas-anim.png";
-
 export const bugImageModules = import.meta.glob("../assets/*-anim.png");
 
 import type { BugSubcategory, BugCategory, Bug } from "../types";
@@ -186,14 +163,14 @@ const bugs: Bug[] = [
     id: "convergent-lady-beetle",
     label: "Convergent Lady Beetle",
     bugCount: 4,
-    src: StinkBug,
+    src: "../assets/stinkbug-anim.png",
     subcategory: bugSubcategories.stinkBug,
   },
   {
     id: "cicada",
     label: "Cicada",
     bugCount: 5,
-    src: Cicada,
+    src: "../assets/cicadas-anim.png",
     size: "500px",
     subcategory: bugSubcategories.cicadas,
   },
@@ -201,28 +178,28 @@ const bugs: Bug[] = [
     id: "aphid",
     label: "Aphid",
     bugCount: 50,
-    src: Aphid,
+    src: "../assets/aphid-anim.png",
     subcategory: bugSubcategories.aphids,
   },
   {
     id: "bedbug",
     label: "Bed Bug",
     bugCount: 25,
-    src: Bedbug,
+    src: "../assets/bedbug-anim.png",
     subcategory: bugSubcategories.bedbugs,
   },
   {
     id: "convergent-lady-beetle",
     label: "Convergent Lady Beetle",
     bugCount: 25,
-    src: Ladybug,
+    src: "../assets/ladybug-anim.png",
     subcategory: bugSubcategories.ladybirdsLadybugs,
   },
   {
     id: "weevil",
     label: "Weevil",
     bugCount: 25,
-    src: Weevil,
+    src: "../assets/weevil-anim.png",
     size: "500px",
     subcategory: bugSubcategories.weevils,
   },
@@ -230,7 +207,7 @@ const bugs: Bug[] = [
     id: "scarab",
     label: "Scarab",
     bugCount: 5,
-    src: Scarab,
+    src: "../assets/scarab-anim.png",
     size: "500px",
     subcategory: bugSubcategories.scarabBeetles,
   },
@@ -238,7 +215,7 @@ const bugs: Bug[] = [
     id: "stag-beetle",
     label: "Stag Beetle",
     bugCount: 5,
-    src: StagBettle,
+    src: "../assets/stag-beetle-anim.png",
     size: "500px",
     subcategory: bugSubcategories.scarabBeetles,
   },
@@ -246,14 +223,14 @@ const bugs: Bug[] = [
     id: "ground-beetle",
     label: "Ground Beetle",
     bugCount: 5,
-    src: GroundBeetle,
+    src: "../assets/ground-beetle-anim.png",
     subcategory: bugSubcategories.groundBeetles,
   },
   {
     id: "shallow-tail",
     label: "Shallow Tail",
     bugCount: 5,
-    src: Shallowtail,
+    src: "../assets/shallowtail-anim.png",
     size: "500px",
     subcategory: bugSubcategories.swallowtails,
   },
@@ -261,7 +238,7 @@ const bugs: Bug[] = [
     id: "hawkmoth",
     label: "Hawk Moth",
     bugCount: 5,
-    src: Hawkmoth,
+    src: "../assets/hawkmoth-anim.png",
     size: "500px",
     subcategory: bugSubcategories.hawkMoths,
   },
@@ -269,7 +246,7 @@ const bugs: Bug[] = [
     id: "brush-footed-butterflies",
     label: "Brush-footed Butterflies",
     bugCount: 5,
-    src: BrushFootedButterfly,
+    src: "../assets/brush-footed-butterfly-anim.png",
     size: "500px",
     subcategory: bugSubcategories.brushFootedButterflies,
   },
@@ -277,63 +254,63 @@ const bugs: Bug[] = [
     id: "bee",
     label: "Bee",
     bugCount: 25,
-    src: Bee,
+    src: "../assets/bee-anim.png",
     subcategory: bugSubcategories.bees,
   },
   {
     id: "ant",
     label: "Ant",
     bugCount: 25,
-    src: Ant,
+    src: "../assets/ant-anim.png",
     subcategory: bugSubcategories.ants,
   },
   {
     id: "wasp",
     label: "Wasp",
     bugCount: 25,
-    src: Wasp,
+    src: "../assets/wasp-anim.png",
     subcategory: bugSubcategories.waspsHornets,
   },
   {
     id: "fly",
     label: "Fly",
     bugCount: 100,
-    src: Fly,
+    src: "../assets/fly-anim.png",
     subcategory: bugSubcategories.houseflies,
   },
   {
     id: "hover-fly",
     label: "Hover Fly",
     bugCount: 25,
-    src: Hoverfly,
+    src: "../assets/hoverfly-anim.png",
     subcategory: bugSubcategories.hoverFly,
   },
   {
     id: "mosquito",
     label: "Mosquitoes",
     bugCount: 25,
-    src: Mosquito,
+    src: "../assets/mosquito-anim.png",
     subcategory: bugSubcategories.mosquitoes,
   },
   {
     id: "american-cockroach",
     label: "American Cockroach",
     bugCount: 25,
-    src: Cockroach,
+    src: "../assets/cockroach-anim.png",
     subcategory: bugSubcategories.pestCockroaches,
   },
   {
     id: "large-cockroach",
     label: "Large Cockroach",
     bugCount: 5,
-    src: CockroachLarge,
+    src: "../assets/cockroach-large-anim.png",
     subcategory: bugSubcategories.wildGiantCockroaches,
   },
   {
     id: "termite",
     label: "Termite",
     bugCount: 25,
-    src: Termite,
+    src: "../assets/termite-anim.png",
     subcategory: bugSubcategories.termites,
   },
 ];
