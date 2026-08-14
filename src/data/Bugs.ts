@@ -160,13 +160,6 @@ const bugSubcategories: Record<string, BugSubcategory> = {
 
 const bugs: Bug[] = [
   {
-    id: "convergent-lady-beetle",
-    label: "Convergent Lady Beetle",
-    bugCount: 4,
-    src: "../assets/stinkbug-anim.png",
-    subcategory: bugSubcategories.stinkBug,
-  },
-  {
     id: "cicada",
     label: "Cicada",
     bugCount: 5,
