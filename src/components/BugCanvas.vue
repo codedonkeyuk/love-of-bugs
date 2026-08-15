@@ -66,8 +66,6 @@ const triggerBugPanic = (targetBug: InteractiveBug, customAngle?: number) => {
 };
 
 const decideAllNextActions = () => {
-  if (!isCurrentlyVisible) return; // Prevent hidden computations
-
   allBugs.forEach((targetBug) => {
     if (targetBug.currentState === "PANIC") return;
 
