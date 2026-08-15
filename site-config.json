@@ -1,8 +1,8 @@
 {
-  "appName": "SPA Template",
-  "shortName": "SPA",
+  "appName": "Love of Bugs",
+  "shortName": "Love of Bugs",
   "themeColor": "#317EFB",
   "backgroundColor": "#ffffff",
   "publicSiteAddress": "http//localhost:8080",
-  "metaDescription": "This is a SPA template originally build by Code Donkey UK."
+  "metaDescription": "This is vue app exploring the love of bugs, built by Code Donkey UK."
 }
