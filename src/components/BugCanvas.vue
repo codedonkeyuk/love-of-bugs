@@ -50,7 +50,6 @@ let isCurrentlyVisible = false;
 const triggerBugPanic = (targetBug: InteractiveBug, customAngle?: number) => {
   targetBug.currentState = "PANIC";
   targetBug.speed = PANIC_SPEED;
-
   targetBug.play();
 
   targetBug.direction =
@@ -61,28 +60,25 @@ const triggerBugPanic = (targetBug: InteractiveBug, customAngle?: number) => {
   targetBug.panicTimeoutId = window.setTimeout(() => {
     targetBug.currentState = "STILL";
     targetBug.speed = 0;
-
     targetBug.stop();
-
     targetBug.panicTimeoutId = null;
   }, PANIC_DURATION);
 };
 
 const decideAllNextActions = () => {
+  if (!isCurrentlyVisible) return; // Prevent hidden computations
+
   allBugs.forEach((targetBug) => {
     if (targetBug.currentState === "PANIC") return;
 
     if (Math.random() < 0.65) {
       targetBug.currentState = "STILL";
       targetBug.speed = 0;
-
       targetBug.stop();
     } else {
       targetBug.currentState = "WANDER";
       targetBug.speed = WANDER_SPEED;
-
       targetBug.play();
-
       targetBug.direction = Math.random() * Math.PI * 2;
     }
   });
@@ -104,11 +100,19 @@ const handlePageScroll = () => {
 };
 
 const updateBugLoop = (ticker: PIXI.Ticker) => {
-  if (!app) return;
-  const delta = ticker.deltaTime;
+  if (!app) return; // Completely drop the variable flag here for isolation
 
-  const boxWidth = app.screen.width;
-  const boxHeight = app.screen.height;
+  // Force actual DOM offset checks if screen bounds dropped to 0 on iPad load
+  const boxWidth =
+    app.screen.width > 0
+      ? app.screen.width
+      : canvasContainer.value?.clientWidth || 300;
+  const boxHeight =
+    app.screen.height > 0
+      ? app.screen.height
+      : canvasContainer.value?.clientHeight || 300;
+
+  const delta = ticker.deltaTime || 1.0;
 
   allBugs.forEach((targetBug) => {
     const mDx = targetBug.x - mousePos.x;
@@ -128,12 +132,16 @@ const updateBugLoop = (ticker: PIXI.Ticker) => {
       targetBug.direction += (Math.random() - 0.5) * 1.5;
     }
 
+    // Apply movement variables
     targetBug.x += Math.cos(targetBug.direction) * targetBug.speed * delta;
     targetBug.y += Math.sin(targetBug.direction) * targetBug.speed * delta;
     targetBug.rotation = targetBug.direction;
 
-    const bugRadius = Math.max(targetBug.width, targetBug.height) / 2;
+    const bugRadius =
+      (targetBug.width > 0 ? Math.max(targetBug.width, targetBug.height) : 40) /
+      2;
 
+    // Direct bounce logic
     if (targetBug.x < bugRadius) {
       targetBug.x = bugRadius;
       targetBug.direction = Math.PI - targetBug.direction;
@@ -169,9 +177,15 @@ onMounted(() => {
     if (!canvasContainer.value || !app.canvas) return;
     canvasContainer.value.appendChild(app.canvas);
 
+    // Fix 1: Force Pixi's Shared Ticker to continue running even if Safari
+    // flags the Canvas tab context as throttled or idle.
+    PIXI.Ticker.shared.autoStart = true;
+
+    // Fix 2: Force the app ticker to wake up from Safari's paint engine locks
+    app.ticker.start();
+
     try {
       const imageLoader = bugImageModules[props.bugSvgUrl];
-
       let finalAssetSource = props.bugSvgUrl;
 
       if (imageLoader) {
@@ -205,7 +219,6 @@ onMounted(() => {
 
       for (let i = 0; i < props.bugCount; i++) {
         const sprite = new PIXI.AnimatedSprite(walkFrames) as InteractiveBug;
-
         sprite.anchor.set(0.5);
 
         const bugRadius = Math.max(FRAME_WIDTH, FRAME_HEIGHT) / 2;
@@ -218,9 +231,7 @@ onMounted(() => {
         sprite.speed = 0;
         sprite.direction = Math.random() * Math.PI * 2;
         sprite.panicTimeoutId = null;
-
         sprite.animationSpeed = 0.15;
-
         sprite.gotoAndStop(Math.floor(Math.random() * TOTAL_FRAMES));
 
         sprite.eventMode = "static";
@@ -240,6 +251,14 @@ onMounted(() => {
         mousePos.x = event.global.x;
         mousePos.y = event.global.y;
       });
+
+      // Fix 3: Map 'touchmove' as an alias for tracking coordinates on Mobile layouts.
+      // Mobile Safari doesn't trigger standard "pointermove" consistently if it thinks the canvas is frozen.
+      app.stage.on("touchmove", (event) => {
+        mousePos.x = event.global.x;
+        mousePos.y = event.global.y;
+      });
+
       app.stage.on("pointerleave", () => {
         mousePos.x = -9999;
         mousePos.y = -9999;
@@ -250,16 +269,20 @@ onMounted(() => {
 
       window.addEventListener("scroll", handlePageScroll, { passive: true });
 
+      // Fix 4: To accommodate Mobile Safari constraints, remove the ticker.stop() command
+      // from the IntersectionObserver. Let the loop stay running, and rely strictly on
+      // our local conditional gate flag to save memory processing loops.
       observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (!app) return;
             if (entry.isIntersecting) {
               isCurrentlyVisible = true;
+              // Wake ticker loop up safely
               app.ticker.start();
+              PIXI.Ticker.shared.start();
             } else {
               isCurrentlyVisible = false;
-              app.ticker.stop();
             }
           });
         },
