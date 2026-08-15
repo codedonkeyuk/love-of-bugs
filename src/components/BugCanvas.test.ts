@@ -2,6 +2,12 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import BugCanvas from "./BugCanvas.vue";
 
+vi.mock("../data/Bugs", () => ({
+  bugImageModules: {
+    "/logo-square.svg": () => Promise.resolve({ default: "mocked-asset.svg" }),
+  },
+}));
+
 vi.mock("pixi.js", () => {
   class MockTexture {
     width = 600;
@@ -45,6 +51,7 @@ vi.mock("pixi.js", () => {
     renderer = {
       resize: vi.fn(),
     };
+    screen = { width: 300, height: 300 };
     destroy = vi.fn();
     init = vi.fn().mockResolvedValue(true);
   }
@@ -56,6 +63,9 @@ vi.mock("pixi.js", () => {
     Rectangle: MockRectangle,
     Assets: {
       load: vi.fn().mockResolvedValue(new MockTexture()),
+    },
+    Ticker: {
+      shared: { autoStart: true, start: vi.fn() },
     },
   };
 });
@@ -79,6 +89,20 @@ describe("BugCanvas.vue", () => {
           toJSON: () => {},
         } as DOMRect;
       });
+
+    Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+      configurable: true,
+      value: 300,
+    });
+    Object.defineProperty(HTMLElement.prototype, "clientHeight", {
+      configurable: true,
+      value: 300,
+    });
+
+    vi.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
+      cb(0);
+      return 0;
+    });
 
     const mockIntersectionObserver = vi.fn().mockImplementation(() => ({
       observe: vi.fn(),
@@ -104,12 +128,15 @@ describe("BugCanvas.vue", () => {
     expect(wrapper.props("bugCount")).toBe(5);
   });
 
-  it("completes layout setup steps smoothly upon execution cycles", () => {
+  it("completes layout setup steps smoothly upon execution cycles", async () => {
     const wrapper = mount(BugCanvas, {
       props: {
         bugSvgUrl: "/logo-square.svg",
       },
     });
+
+    await vi.dynamicImportSettled();
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(wrapper.exists()).toBe(true);
   });
