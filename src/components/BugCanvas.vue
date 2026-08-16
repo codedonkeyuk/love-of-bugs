@@ -98,9 +98,8 @@ const handlePageScroll = () => {
 };
 
 const updateBugLoop = (ticker: PIXI.Ticker) => {
-  if (!app) return; // Completely drop the variable flag here for isolation
+  if (!app) return;
 
-  // Force actual DOM offset checks if screen bounds dropped to 0 on iPad load
   const boxWidth =
     app.screen.width > 0
       ? app.screen.width
@@ -130,7 +129,6 @@ const updateBugLoop = (ticker: PIXI.Ticker) => {
       targetBug.direction += (Math.random() - 0.5) * 1.5;
     }
 
-    // Apply movement variables
     targetBug.x += Math.cos(targetBug.direction) * targetBug.speed * delta;
     targetBug.y += Math.sin(targetBug.direction) * targetBug.speed * delta;
     targetBug.rotation = targetBug.direction;
@@ -139,7 +137,6 @@ const updateBugLoop = (ticker: PIXI.Ticker) => {
       (targetBug.width > 0 ? Math.max(targetBug.width, targetBug.height) : 40) /
       2;
 
-    // Direct bounce logic
     if (targetBug.x < bugRadius) {
       targetBug.x = bugRadius;
       targetBug.direction = Math.PI - targetBug.direction;
@@ -175,11 +172,8 @@ onMounted(() => {
     if (!canvasContainer.value || !app.canvas) return;
     canvasContainer.value.appendChild(app.canvas);
 
-    // Fix 1: Force Pixi's Shared Ticker to continue running even if Safari
-    // flags the Canvas tab context as throttled or idle.
     PIXI.Ticker.shared.autoStart = true;
 
-    // Fix 2: Force the app ticker to wake up from Safari's paint engine locks
     app.ticker.start();
 
     try {
@@ -250,8 +244,6 @@ onMounted(() => {
         mousePos.y = event.global.y;
       });
 
-      // Fix 3: Map 'touchmove' as an alias for tracking coordinates on Mobile layouts.
-      // Mobile Safari doesn't trigger standard "pointermove" consistently if it thinks the canvas is frozen.
       app.stage.on("touchmove", (event) => {
         mousePos.x = event.global.x;
         mousePos.y = event.global.y;
@@ -267,16 +259,12 @@ onMounted(() => {
 
       window.addEventListener("scroll", handlePageScroll, { passive: true });
 
-      // Fix 4: To accommodate Mobile Safari constraints, remove the ticker.stop() command
-      // from the IntersectionObserver. Let the loop stay running, and rely strictly on
-      // our local conditional gate flag to save memory processing loops.
       observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (!app) return;
             if (entry.isIntersecting) {
               isCurrentlyVisible = true;
-              // Wake ticker loop up safely
               app.ticker.start();
               PIXI.Ticker.shared.start();
             } else {

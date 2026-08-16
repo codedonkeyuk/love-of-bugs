@@ -35,7 +35,6 @@ export const globalState = reactive({
 
 export function nextMessage() {
   messageIndex++;
-
   if (messageIndex < config.length) {
     const currentItem = config[messageIndex];
     globalState.message = currentItem.message;
@@ -46,4 +45,16 @@ export function nextMessage() {
       globalState.finished = true;
     }
   }
+}
+
+export function skipContent() {
+  const lastItm = config.length - 2;
+  for (let i = messageIndex; i < lastItm; i++) {
+    const item = config[i];
+    if (item.bug) {
+      globalState.bugs[item.bug] = true;
+    }
+  }
+  messageIndex = lastItm;
+  nextMessage();
 }

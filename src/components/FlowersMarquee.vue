@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import { globalState, nextMessage } from "../state/globalState.ts";
+import { globalState, nextMessage, skipContent } from "../state/globalState.ts";
+import ButtonBar from "./ButtonBar.vue";
 
 const isPaused = ref(false);
 const isFading = ref(false);
@@ -8,7 +9,9 @@ let intervalId = null;
 const ROTATION_SPEED = 5000;
 
 const stepToNextMessage = () => {
-  isFading.value = true;
+  if (!globalState.finished) {
+    isFading.value = true;
+  }
 
   setTimeout(() => {
     nextMessage();
@@ -60,21 +63,29 @@ onUnmounted(() => stopTimer());
         {{ globalState.message }}
       </span>
     </div>
-
-    <button
-      v-if="!globalState.finished"
-      class="btn"
-      :aria-pressed="isPaused"
-      :aria-label="
-        isPaused
-          ? 'Resume announcement rotations'
-          : 'Pause announcement rotations'
-      "
-      @click="togglePlayPause"
-    >
-      {{ isPaused ? "Play" : "Pause" }}
-    </button>
-
+    <ButtonBar>
+      <button
+        v-if="!globalState.finished"
+        class="btn"
+        :aria-pressed="isPaused"
+        :aria-label="
+          isPaused
+            ? 'Resume announcement rotations'
+            : 'Pause announcement rotations'
+        "
+        @click="togglePlayPause"
+      >
+        {{ isPaused ? "Play" : "Pause" }}
+      </button>
+      <button
+        v-if="!globalState.finished"
+        class="btn"
+        :aria-pressed="isPaused"
+        @click="skipContent"
+      >
+        Skip
+      </button>
+    </ButtonBar>
     <slot v-if="globalState.finished"></slot>
   </div>
 </template>
