@@ -81,5 +81,6 @@ if (!targetBug) {
   max-width: 96vw;
   padding: 1vh 2vw;
   background-color: var(--main-background);
+  z-index: 1001;
 }
 </style>
