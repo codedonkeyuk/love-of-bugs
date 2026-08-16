@@ -4,6 +4,7 @@ import { RouterLink } from "vue-router";
 import AnthonyHappy from "../assets/anthony-happy.png";
 import AnthonyShocked from "../assets/anthony-shocked.png";
 import type { AssistantMessage } from "../types";
+import ButtonBar from "./ButtonBar.vue";
 
 const avatarEmotions = {
   happy: AnthonyHappy,
@@ -56,63 +57,61 @@ const handleClose = () => {
     aria-owns="bubble-msg avatar-block"
     tabindex="-1"
   >
-    <div
-      id="bubble-msg"
-      ref="textRef"
-      class="assistant-bubble"
-      v-if="showMessage"
-      tabindex="-1"
-      style="outline: none"
-    >
-      <button
-        class="close-bubble"
-        @click="handleClose"
-        aria-label="Close message bubble"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-
+    <div class="assistant-cartoon">
       <div
-        class="assistant-text"
-        :tabindex="
-          messages[selectedMessage].message.length > 200 ? '0' : undefined
-        "
-        role="document"
-        aria-label="Message content"
+        id="bubble-msg"
+        ref="textRef"
+        class="assistant-bubble"
+        v-if="showMessage"
+        tabindex="-1"
+        style="outline: none"
       >
-        {{ messages[selectedMessage].message }}
-      </div>
-    </div>
-
-    <div id="avatar-block" class="assistant-avatar" role="presentation">
-      <img
-        :src="avatarEmotions[messages[selectedMessage].emotion]"
-        alt="Anthony the ant avatar"
-        class="assistant-avatar-image"
-      />
-      <div
-        class="assistant-buttonbar"
-        role="group"
-        aria-label="Assistant actions"
-      >
-        <RouterLink
-          v-for="button in messages[selectedMessage].buttons"
-          :key="button.name"
-          class="assistant__btn"
-          :to="button.location"
-        >
-          {{ button.name }}
-        </RouterLink>
         <button
-          class="assistant__btn"
-          @click="selectedMessage++"
-          v-if="selectedMessage < messages.length - 1"
-          :aria-label="`Next message. Step ${selectedMessage + 1} of ${messages.length}`"
+          class="close-bubble"
+          @click="handleClose"
+          aria-label="Close message bubble"
         >
-          Next
+          <span aria-hidden="true">&times;</span>
         </button>
+
+        <div
+          class="assistant-text"
+          :tabindex="
+            messages[selectedMessage].message.length > 200 ? '0' : undefined
+          "
+          role="document"
+          aria-label="Message content"
+        >
+          {{ messages[selectedMessage].message }}
+        </div>
+      </div>
+
+      <div id="avatar-block" class="assistant-avatar" role="presentation">
+        <img
+          :src="avatarEmotions[messages[selectedMessage].emotion]"
+          alt="Anthony the ant avatar"
+          class="assistant-avatar-image"
+        />
       </div>
     </div>
+    <ButtonBar>
+      <RouterLink
+        v-for="button in messages[selectedMessage].buttons"
+        :key="button.name"
+        class="btn assitantBtn"
+        :to="button.location"
+      >
+        {{ button.name }}
+      </RouterLink>
+      <button
+        class="btn assitantBtn"
+        @click="selectedMessage++"
+        v-if="selectedMessage < messages.length - 1"
+        :aria-label="`Next message. Step ${selectedMessage + 1} of ${messages.length}`"
+      >
+        Next
+      </button>
+    </ButtonBar>
   </div>
 </template>
 
@@ -120,7 +119,7 @@ const handleClose = () => {
 .assistant {
   position: fixed;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
   align-content: center;
@@ -131,6 +130,18 @@ const handleClose = () => {
   padding: 10px;
   gap: 10px;
   z-index: 1000;
+}
+
+.assistant-cartoon {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: flex-start;
+  align-content: center;
+}
+
+.assitantBtn {
+  min-width: 160px;
 }
 
 .assistant-avatar {
@@ -258,52 +269,6 @@ const handleClose = () => {
   outline-offset: 2px;
 }
 
-.assistant__btn {
-  display: inline-block;
-  box-sizing: border-box;
-
-  appearance: none;
-  border: none;
-  text-decoration: none;
-  background: none;
-
-  font-family: sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
-  line-height: 1;
-  margin: 0px 10px 10px 0px;
-  width: 100%;
-
-  background-color: var(--button-background);
-  color: var(--button-color);
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-
-  cursor: pointer;
-  user-select: none;
-  transition:
-    background-color 0.2s ease,
-    transform 0.1s ease;
-
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.assistant__btn:hover {
-  background-color: var(--button-background-hover);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-}
-
-.assistant__btn:active {
-  transform: scale(0.98);
-  box-shadow: none;
-}
-
-.assistant__btn:focus-visible {
-  outline: 3px solid var(--button-background-focus);
-  outline-offset: 2px;
-}
-
 @media (max-width: 768px) {
   .assistant {
     top: auto;
@@ -332,30 +297,17 @@ const handleClose = () => {
   .assistant-avatar-image {
     width: 100px;
   }
-}
-@media screen and (orientation: landscape) and (max-height: 480px) {
-  .assistant {
-    top: auto;
-    bottom: 0px;
-    left: 0px;
-    transform: translateX(0%);
-    width: 60vw;
-    flex-direction: row-reverse;
+
+  .assistant-cartoon {
     align-items: flex-end;
   }
-
-  .assistant-bubble {
-    text-align: left;
-    margin-left: 25px;
-    margin-right: 10px;
-  }
-
-  .assistant-avatar {
-    width: 100px;
-  }
-
+}
+@media screen and (orientation: landscape) and (max-height: 480px) {
   .assistant-avatar-image {
     width: 100px;
+  }
+  .assitantBtn {
+    min-width: 100px;
   }
 }
 </style>

@@ -183,7 +183,7 @@ const bugs: Bug[] = [
   },
   {
     id: "convergent-lady-beetle",
-    label: "Convergent Lady Beetle",
+    label: "Lady Bug (Convergent Lady Beetle)",
     bugCount: 25,
     src: "../assets/ladybug-anim.png",
     subcategory: bugSubcategories.ladybirdsLadybugs,

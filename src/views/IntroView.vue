@@ -28,7 +28,7 @@ const assistantMessages: AssistantMessage[] = [
     trigger: () => {
       isNear.value = true;
     },
-    buttons: [{ name: "Bug Archive", location: "/bug-archive" }],
+    buttons: [{ name: "Next", location: "/bug-archive" }],
   },
 ];
 </script>

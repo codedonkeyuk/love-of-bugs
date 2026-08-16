@@ -63,7 +63,7 @@ onUnmounted(() => stopTimer());
         {{ globalState.message }}
       </span>
     </div>
-    <ButtonBar>
+    <ButtonBar align="right">
       <button
         v-if="!globalState.finished"
         class="btn"

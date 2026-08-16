@@ -60,7 +60,7 @@ describe("IntroView.vue", () => {
     expect(passedMessages[2].message).toContain("oh thats a furry spider");
     expect(passedMessages[2].emotion).toBe("shocked");
     expect(passedMessages[2].buttons).toEqual([
-      { name: "Bug Archive", location: "/bug-archive" },
+      { name: "Next", location: "/bug-archive" },
     ]);
   });
 
