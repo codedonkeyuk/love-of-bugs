@@ -24,13 +24,11 @@ if (!targetBug) {
         <div class="bug-details">
           <h1>{{ targetBug.label }}</h1>
           <p>
-            The {{ targetBug.label }} belongs to the
-            {{ targetBug.subcategory.name }},
             {{ targetBug.subcategory.description }}
           </p>
           <p>
-            {{ targetBug.subcategory.name }} belongs to
-            {{ targetBug.subcategory.bugCategory.name }}.
+            {{ targetBug.subcategory.name }} belongs to the
+            {{ targetBug.subcategory.bugCategory.name }},
             {{ targetBug.subcategory.bugCategory.description }}
           </p>
         </div>

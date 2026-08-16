@@ -57,11 +57,9 @@ describe("BugBox.vue", () => {
     expect(wrapper.find("h1").text()).toBe("Fire Ant");
 
     const paragraphs = wrapper.findAll("p");
-    expect(paragraphs[0].text()).toContain(
-      "Fire Ant belongs to the Formicidae, Stinging social insects.",
-    );
+    expect(paragraphs[0].text()).toContain("Stinging social insects.");
     expect(paragraphs[1].text()).toContain(
-      "Formicidae belongs to Hymenoptera. Membrane-winged insect family.",
+      "Formicidae belongs to the Hymenoptera, Membrane-winged insect family.",
     );
 
     const returnLink = wrapper.findComponent({ name: "RouterLink" });
