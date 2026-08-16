@@ -3,6 +3,7 @@ import { RouterLink } from "vue-router";
 import CatalogWrapper from "../components/CatalogWrapper.vue";
 import BugCanvas from "../components/BugCanvas.vue";
 import Bugs from "../data/Bugs.js";
+import ButtonBar from "../components/ButtonBar.vue";
 
 const props = defineProps<{
   sampleId: string;
@@ -32,9 +33,6 @@ if (!targetBug) {
             {{ targetBug.subcategory.bugCategory.name }}.
             {{ targetBug.subcategory.bugCategory.description }}
           </p>
-          <RouterLink class="btn return-button" to="/bug-archive">
-            Return to Menu
-          </RouterLink>
         </div>
       </div>
       <BugCanvas
@@ -44,19 +42,20 @@ if (!targetBug) {
         :label="targetBug.label"
       />
     </div>
+    <ButtonBar class="bug-button-bar" align="right">
+      <RouterLink class="btn" to="/bug-archive"> Return to Menu </RouterLink>
+    </ButtonBar>
   </CatalogWrapper>
 </template>
 <style>
 .bug-container {
-  width: 100vw;
-  height: 100vh;
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
-  border-width: 72px 56px 55px 32px;
+  border-width: 72px 56px 0px 32px;
   border-style: solid;
   border-image-source: url("../assets/bug-background.svg");
-  border-image-slice: 6.8% 5% 2.5% 2.8% fill;
+  border-image-slice: 6.8% 5% 0 2.8% fill;
   border-image-repeat: stretch;
 }
 
@@ -76,10 +75,11 @@ if (!targetBug) {
   width: 70vw;
 }
 
-.return-button {
+.bug-button-bar {
   position: fixed;
-  z-index: 1001;
-  bottom: 5px;
-  right: 31px;
+  bottom: 0px;
+  max-width: 96vw;
+  padding: 1vh 2vw;
+  background-color: var(--main-background);
 }
 </style>

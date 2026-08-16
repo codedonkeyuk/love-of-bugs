@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="1000.3603"
-   height="1000.1439"
-   viewBox="0 0 264.67866 264.62139"
+   width="1000.3604"
+   height="999.64337"
+   viewBox="0 0 264.67868 264.48895"
    version="1.1"
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@
      id="defs1" />
   <g
      id="layer1"
-     transform="translate(0.05726644)">
+     transform="matrix(1,0,0,1.0243362,0.05726644,0)">
     <rect
        style="fill:#c3b091;fill-opacity:1;stroke:none;stroke-width:1.00456;stroke-linejoin:round"
        id="rect6"
@@ -22,17 +22,10 @@
        x="0"
        y="0" />
     <rect
-       style="fill:#c3b091;fill-opacity:1;stroke:none;stroke-width:1.00456;stroke-linejoin:round"
-       id="rect7"
-       width="264.6214"
-       height="6.475708"
-       x="-9.7175068e-09"
-       y="258.14569" />
-    <rect
-       style="fill:#c3b091;fill-opacity:1;stroke:none;stroke-width:1.004;stroke-linejoin:round"
+       style="fill:#c3b091;fill-opacity:1;stroke:none;stroke-width:1.00282;stroke-linejoin:round"
        id="rect8"
        width="7.0644145"
-       height="250.49255"
+       height="249.9053"
        x="257.55698"
        y="8.2418242" />
     <path
@@ -51,10 +44,10 @@
        x="-1.9435022e-08"
        y="18.088524" />
     <rect
-       style="fill:#c3b091;fill-opacity:1;stroke:none;stroke-width:1.03768;stroke-linejoin:round"
+       style="fill:#c3b091;fill-opacity:1;stroke:none;stroke-width:1.03474;stroke-linejoin:round"
        id="rect8-3"
        width="7.2851777"
-       height="259.47025"
+       height="258.00211"
        x="-0.057266444"
        y="0.067995556" />
   </g>
