@@ -276,6 +276,25 @@ onMounted(() => {
       );
 
       observer.observe(sceneContainer.value);
+
+      const handleResize = () => {
+        if (!canvasContainer.value || !app) return;
+
+        app.resizeTo = canvasContainer.value;
+        app.resize();
+
+        app.stage.hitArea = app.screen;
+      };
+
+      window.addEventListener("resize", handleResize);
+
+      onUnmounted(() => {
+        window.removeEventListener("resize", handleResize);
+        window.removeEventListener("scroll", handlePageScroll);
+        if (behaviorIntervalId) clearInterval(behaviorIntervalId);
+        if (observer) observer.disconnect();
+        if (app) app.destroy(true, { children: true, texture: false });
+      });
     } catch (error) {
       console.error("PixiJS initialization error:", error);
     }
