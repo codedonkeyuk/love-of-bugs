@@ -1,6 +1,6 @@
-# love-of-bugs
+# Bug Box
 
-First app in my cursed series. A site dedicated to ones love of bugs. This app currently only hosts an intro page. Took me three days to build that as I had to build all the SVG assets by hand. Currently working on SASS nightmare on a separate dev branch.
+First app in my cursed series. A site dedicated to bugs. This app currently only hosts an intro page. Took me three days to build that as I had to build all the SVG assets by hand. Currently working on SASS nightmare on a separate dev branch.
 
 Vite has been configured to generate icons off a single svg file. This svg file is also used for social media image. You need to edit [./public/logo-square.svg](./public/logo-square.svg) to change all the images used in the app for social sharing and icons.
 

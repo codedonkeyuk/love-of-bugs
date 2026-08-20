@@ -35,7 +35,7 @@ describe("Global State Manager", () => {
     expect(globalState.finished).toBe(false);
 
     nextMessage();
-    expect(globalState.message).toBe("Welcome to the Love of Bugs");
+    expect(globalState.message).toBe("Welcome to Bug Box");
     expect(globalState.finished).toBe(true);
 
     const finalMsg = globalState.message;

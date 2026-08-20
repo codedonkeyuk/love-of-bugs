@@ -1,14 +1,14 @@
 {
-  "name": "love-of-bugs",
+  "name": "bug-box",
   "version": "0.0.1",
-  "description": "Love of Bugs example application.",
-  "homepage": "https://github.com/codedonkeyuk/spa-template#readme",
+  "description": "Bug Box example application.",
+  "homepage": "https://github.com/codedonkeyuk/bug-box#readme",
   "bugs": {
-    "url": "https://github.com/codedonkeyuk/spa-templateissues"
+    "url": "https://github.com/codedonkeyuk/bug-box#issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.comcodedonkeyuk/spa-template.git"
+    "url": "git+https://github.comcodedonkeyuk//bug-box.git"
   },
   "license": "MIT",
   "author": "Leigh",

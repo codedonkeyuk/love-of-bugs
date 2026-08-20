@@ -1,8 +1,8 @@
 {
-  "appName": "Love of Bugs",
-  "shortName": "Love of Bugs",
+  "appName": "Bug Box",
+  "shortName": "Bug Box",
   "themeColor": "#317EFB",
   "backgroundColor": "#ffffff",
   "publicSiteAddress": "http//localhost:8080",
-  "metaDescription": "This is vue app exploring the love of bugs, built by Code Donkey UK."
+  "metaDescription": "This is an example web application called Bug Box, built by Code Donkey UK."
 }
