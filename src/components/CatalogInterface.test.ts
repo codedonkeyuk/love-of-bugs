@@ -11,7 +11,7 @@ describe("CatalogInterface.vue", () => {
       true,
     );
 
-    expect(wrapper.find("h2").text()).toBe("Bug Archive");
+    expect(wrapper.find("h1").text()).toBe("Bug Box");
   });
 
   it('displays the fallback slot content ("Loading...") when no slot is provided', () => {

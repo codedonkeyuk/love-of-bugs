@@ -1,7 +1,7 @@
 <template>
   <div class="catalog-interface-container">
     <div class="catalog-interface-container-terminal">
-      <h2>Bug Archive</h2>
+      <h1>Bug Box</h1>
       <slot>Loading...</slot>
     </div>
   </div>
@@ -29,7 +29,7 @@
   color: var(--main-color);
   border-radius: 10px;
   padding: 15px;
-  width: 250px;
+  width: 300px;
   background-color: var(--card-background);
 }
 </style>
